@@ -361,3 +361,58 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 
 *Result:* $u_n = sin(((n + (1) / (2)) pi x) / (L)) e^(-kappa lambda_n t)$.
 
+=== Example 14: 1D Heat Equation Basics
+*Question:* Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ on $0 < x < L$ with $u(0,t)=u(L,t)=0$ and $u(x,0) = A sin((3 pi x) / (L))$[cite: 169, 171, 180, 186]. What does $(dif^2 u) / (dif x^2)$ measure physically, and what are the steady-state solutions[cite: 173, 176]?
+*Steps:*
+1. Interpretation: $(dif^2 u) / (dif x^2)$ measures the spatial curvature[cite: 173]. Heat changes fastest where curvature is highest[cite: 174].
+2. Steady-state: Set $(dif u) / (dif t) = 0 arrow.double (dif^2 u) / (dif x^2) = 0 arrow.double u(x) = c_1 x + c_2$[cite: 176]. With zero BCs, $u(x)=0$[cite: 181].
+3. SOV: $u(x,t) = X(x)T(t) arrow.double X_n(x) = sin((n pi x) / (L))$ and $T_n(t) = e^(-kappa ((n pi) / (L))^2 t)$[cite: 179].
+4. Apply IC: $u(x,0) = A sin((3 pi x) / (L))$ matches exactly the $n=3$ mode bc the basis is orthogonal[cite: 186].
+*Result:* $u(x,t) = A sin((3 pi x) / (L)) e^(-kappa ((3 pi) / (L))^2 t)$[cite: 186]. Profile decays exponentially to zero as $t arrow infinity$[cite: 187].
+
+=== Example 15: Fourier Sine Series of a Step
+*Question:* Find the sine series for $f(x) = A$ on $(0, L/2)$ and $0$ on $(L/2, L)$[cite: 190, 192]. Which coefficients vanish[cite: 195]?
+*Steps:*
+1. Formula: $b_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x = (2A) / (L) integral_0^(L/2) sin((n pi x) / (L)) dif x$[cite: 193].
+2. Integrate: $b_n = (2A) / (L) [ -(L) / (n pi) cos((n pi x) / (L)) ]_0^(L/2) = (2A) / (n pi) (1 - cos((n pi) / (2)))$[cite: 194].
+3. Evaluate modes: $cos((n pi) / (2))$ is $0$ for odd $n$, $-1$ for $n=2, 6, 10$, and $1$ for $n=4, 8, 12$[cite: 195].
+4. Vanishing condition: $b_n = 0$ when $cos((n pi) / (2)) = 1 arrow.double n = 4k$ for integer $k$[cite: 195].
+*Result:* $b_n = (2A) / (n pi) (1 - cos((n pi) / (2)))$[cite: 194]. Modes $n=4, 8, 12, dots$ vanish[cite: 195]. The first two non-zero terms are $n=1, 2$[cite: 196].
+
+=== Example 16: Cauchy-Euler SL Problem
+*Question:* Analyze $x^2 (dif^2 phi.alt) / (dif x^2) + x (dif phi.alt) / (dif x) + lambda phi.alt = 0$ on $[1, b]$ with $phi.alt(1)=phi.alt(b)=0$[cite: 218, 219].
+*Steps:* 1. SL Form: Divide by $x arrow.double (dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$[cite: 221]. Regular on $[1,b]$ since $p=x>0, sigma=(1)/(x)>0$[cite: 220]. 2. Eigenvalues sign: $q=0$ and Dirichlet BCs guarantee $lambda > 0$ strictly[cite: 222].
+3. Transform: Sub $x = e^z arrow.double (dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$ for $z in [0, ln b]$[cite: 223].
+4. Solve: $phi.alt(z) = c_1 cos(sqrt(lambda) z) + c_2 sin(sqrt(lambda) z)$[cite: 223]. BCs dictate $c_1=0$ and $sqrt(lambda) ln b = n pi$[cite: 219, 223].
+*Result:* $lambda_n = ((n pi) / (ln b))^2$ and $phi.alt_n(x) = sin((n pi ln x) / (ln b))$[cite: 223].
+
+=== Example 17: 1D Wave with Step Velocity
+*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=u(L,t)=0$, $u(x,0)=0$, and $u_t(x,0) = V$ for $x in (0, L/2)$, else $0$[cite: 227, 228, 234].
+*Steps:*
+1. SOV: $u = phi.alt(x)h(t)$[cite: 235]. Spatial yields $phi.alt_n(x) = sin((n pi x) / (L))$ with $lambda_n = ((n pi) / (L))^2$[cite: 235].
+2. Temporal: $h_n(t) = A_n cos((n pi c t) / (L)) + B_n sin((n pi c t) / (L))$. $u(x,0)=0 arrow.double A_n = 0$[cite: 234, 235].
+3. Apply IC: $(dif u) / (dif t) (x,0) = sum B_n ((n pi c) / (L)) sin((n pi x) / (L)) = g(x)$[cite: 234, 237].
+4. Coeffs: $B_n ((n pi c) / (L)) = (2) / (L) integral_0^(L/2) V sin((n pi x) / (L)) dif x = (2V) / (n pi) (1 - cos((n pi) / (2)))$[cite: 234, 237].
+5. Zero modes: $B_n = 0$ when $cos((n pi)/(2)) = 1 arrow.double n = 4k$[cite: 238].
+*Result:* $u(x,t) = sum_(n=1)^infinity (2V L) / (n^2 pi^2 c) (1 - cos((n pi) / (2))) sin((n pi x) / (L)) sin((n pi c t) / (L))$[cite: 236, 237]. Modes where $n$ is a multiple of $4$ are not excited[cite: 238].
+
+=== Example 18: 3D Wave on Circular Slab
+*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $r < a, 0 < z < H$ with zero BCs[cite: 252, 258]. IC: $u = r(a-r) cos theta sin((pi z) / (H))$, $u_t = 0$[cite: 261, 262].
+*Steps:*
+1. SOV $u = R(r)Theta(theta)Z(z)T(t)$[cite: 261]. IC dependencies force $Z(z) = sin((pi z) / (H))$ and $Theta(theta) = cos theta$ ($m=1$)[cite: 262].
+2. Radial: $R_k(r) = J_1(sqrt(mu_k) r)$ where $sqrt(mu_k) = (z_(1,k)) / (a)$ to satisfy $u(a)=0$[cite: 257, 261].
+3. Temporal: $(dif^2 T) / (dif t^2) = -c^2 (mu_k + ((pi) / (H))^2) T$[cite: 252]. $u_t=0 arrow.double T_k(t) = cos(omega_k t)$ with $omega_k = c sqrt(((z_(1,k))/(a))^2 + ((pi)/(H))^2)$[cite: 262].
+4. Expand: $u(r,theta,z,t) = cos theta sin((pi z) / (H)) sum A_k J_1((z_(1,k) r) / (a)) cos(omega_k t)$[cite: 261].
+5. IC match: $sum A_k J_1 = r(a-r) arrow.double A_k = (2) / (a^2 J_2^2(z_(1,k))) integral_0^a r(a-r) J_1((z_(1,k) r) / (a)) r dif r$[cite: 262].
+*Result:* Exact 3D series solution defined by $A_k$ expansion, integrating over the initial radial profile[cite: 261, 262].
+
+=== Example 19: BVP via Eigenfunctions & Green's
+*Question:* Solve $(dif^2 u) / (dif x^2) + u = f(x)$ with $u(0)=u(L)=0$ ($L eq.not n pi$)[cite: 267, 269, 272]. Compare eigenfunction and Green's function methods for $f(x)=sin((2 pi x) / (L))$[cite: 273, 274, 276].
+*Steps:*
+1. Eigenfunction: Let $u = sum a_n sin((n pi x) / (L))$[cite: 273]. Sub in: $sum a_n (1 - ((n pi)/(L))^2) sin((n pi x) / (L)) = f(x)$[cite: 267, 273].
+2. Coeffs: $a_n = (f_n) / (1 - ((n pi)/(L))^2)$ where $f_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x$[cite: 273].
+3. Green's Function: Homogeneous solutions $u_1 = sin x, u_2 = sin(L-x)$[cite: 274]. Wronskian $W = u_1 u_2' - u_1' u_2 = -sin L$[cite: 272, 274].
+4. Form $G$: $G(x,x_0) = (sin x_< sin(L-x_>)) / (sin L)$[cite: 274]. Sol is $u(x) = integral_0^L G(x,x_0) f(x_0) dif x_0$[cite: 274].
+5. Comparison: For $f(x)=sin((2 pi x)/(L))$, eigenfunction method naturally isolates $n=2 arrow.double u(x) = (1) / (1 - ((2 pi)/(L))^2) sin((2 pi x) / (L))$[cite: 275, 276].
+6. Green's integral: $integral_0^L G(x,x_0) sin((2 pi x_0) / (L)) dif x_0$ evaluates to the identical single harmonic term afaict[cite: 275, 276].
+*Result:* Both methods rigorously yield $u(x) = (L^2) / (L^2 - 4 pi^2) sin((2 pi x) / (L))$[cite: 275, 276].
