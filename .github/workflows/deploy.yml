@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Install Typst
-        uses: chataigner/setup-typst@v1
+        uses: typst/setup-typst@v3
         
       - name: Compile PDF
         run: typst compile fmm_cheatsheet.typ fmm_cheatsheet.pdf
