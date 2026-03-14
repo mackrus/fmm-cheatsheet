@@ -1,5 +1,19 @@
 // Template for dense Typst cheat sheets
 
+#let example_counter = counter("example")
+
+#let example(title, question, steps, result) = {
+  example_counter.step()
+  block(breakable: true, width: 100%, inset: (y: 2pt))[
+    *Example #example_counter.display(): #title* \
+    #set text(size: 4.5pt)
+    *Question:* #question \
+    *Steps:*
+    #steps
+    *Result:* #result
+  ]
+}
+
 #let cheatsheet(
   title: "Cheat Sheet",
   author: none,
