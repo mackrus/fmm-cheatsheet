@@ -362,57 +362,93 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 *Result:* $u_n = sin(((n + (1) / (2)) pi x) / (L)) e^(-kappa lambda_n t)$.
 
 === Example 14: 1D Heat Equation Basics
-*Question:* Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ on $0 < x < L$ with $u(0,t)=u(L,t)=0$ and $u(x,0) = A sin((3 pi x) / (L))$[cite: 169, 171, 180, 186]. What does $(dif^2 u) / (dif x^2)$ measure physically, and what are the steady-state solutions[cite: 173, 176]?
+*Question:* Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ on $0 < x < L$ with $u(0,t)=u(L,t)=0$ and $u(x,0) = A sin((3 pi x) / (L))$. What does $(dif^2 u) / (dif x^2)$ measure physically, and what are the steady-state solutions?
 *Steps:*
-1. Interpretation: $(dif^2 u) / (dif x^2)$ measures the spatial curvature[cite: 173]. Heat changes fastest where curvature is highest[cite: 174].
-2. Steady-state: Set $(dif u) / (dif t) = 0 arrow.double (dif^2 u) / (dif x^2) = 0 arrow.double u(x) = c_1 x + c_2$[cite: 176]. With zero BCs, $u(x)=0$[cite: 181].
-3. SOV: $u(x,t) = X(x)T(t) arrow.double X_n(x) = sin((n pi x) / (L))$ and $T_n(t) = e^(-kappa ((n pi) / (L))^2 t)$[cite: 179].
-4. Apply IC: $u(x,0) = A sin((3 pi x) / (L))$ matches exactly the $n=3$ mode bc the basis is orthogonal[cite: 186].
-*Result:* $u(x,t) = A sin((3 pi x) / (L)) e^(-kappa ((3 pi) / (L))^2 t)$[cite: 186]. Profile decays exponentially to zero as $t arrow infinity$[cite: 187].
+1. Interpretation: $(dif^2 u) / (dif x^2)$ measures the spatial curvature. Heat changes fastest where curvature is highest.
+2. Steady-state: Set $(dif u) / (dif t) = 0 arrow.double (dif^2 u) / (dif x^2) = 0 arrow.double u(x) = c_1 x + c_2$. With zero BCs, $u(x)=0$.
+3. SOV: $u(x,t) = X(x)T(t) arrow.double X_n(x) = sin((n pi x) / (L))$ and $T_n(t) = e^(-kappa ((n pi) / (L))^2 t)$.
+4. Apply IC: $u(x,0) = A sin((3 pi x) / (L))$ matches exactly the $n=3$ mode bc the basis is orthogonal.
+*Result:* $u(x,t) = A sin((3 pi x) / (L)) e^(-kappa ((3 pi) / (L))^2 t)$. Profile decays exponentially to zero as $t arrow infinity$.
 
 === Example 15: Fourier Sine Series of a Step
-*Question:* Find the sine series for $f(x) = A$ on $(0, L/2)$ and $0$ on $(L/2, L)$[cite: 190, 192]. Which coefficients vanish[cite: 195]?
+*Question:* Find the sine series for $f(x) = A$ on $(0, L/2)$ and $0$ on $(L/2, L)$. Which coefficients vanish?
 *Steps:*
-1. Formula: $b_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x = (2A) / (L) integral_0^(L/2) sin((n pi x) / (L)) dif x$[cite: 193].
-2. Integrate: $b_n = (2A) / (L) [ -(L) / (n pi) cos((n pi x) / (L)) ]_0^(L/2) = (2A) / (n pi) (1 - cos((n pi) / (2)))$[cite: 194].
-3. Evaluate modes: $cos((n pi) / (2))$ is $0$ for odd $n$, $-1$ for $n=2, 6, 10$, and $1$ for $n=4, 8, 12$[cite: 195].
-4. Vanishing condition: $b_n = 0$ when $cos((n pi) / (2)) = 1 arrow.double n = 4k$ for integer $k$[cite: 195].
-*Result:* $b_n = (2A) / (n pi) (1 - cos((n pi) / (2)))$[cite: 194]. Modes $n=4, 8, 12, dots$ vanish[cite: 195]. The first two non-zero terms are $n=1, 2$[cite: 196].
+1. Formula: $b_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x = (2A) / (L) integral_0^(L/2) sin((n pi x) / (L)) dif x$.
+2. Integrate: $b_n = (2A) / (L) [ -(L) / (n pi) cos((n pi x) / (L)) ]_0^(L/2) = (2A) / (n pi) (1 - cos((n pi) / (2)))$.
+3. Evaluate modes: $cos((n pi) / (2))$ is $0$ for odd $n$, $-1$ for $n=2, 6, 10$, and $1$ for $n=4, 8, 12$.
+4. Vanishing condition: $b_n = 0$ when $cos((n pi) / (2)) = 1 arrow.double n = 4k$ for integer $k$.
+*Result:* $b_n = (2A) / (n pi) (1 - cos((n pi) / (2)))$. Modes $n=4, 8, 12, dots$ vanish. The first two non-zero terms are $n=1, 2$.
 
 === Example 16: Cauchy-Euler SL Problem
-*Question:* Analyze $x^2 (dif^2 phi.alt) / (dif x^2) + x (dif phi.alt) / (dif x) + lambda phi.alt = 0$ on $[1, b]$ with $phi.alt(1)=phi.alt(b)=0$[cite: 218, 219].
-*Steps:* 1. SL Form: Divide by $x arrow.double (dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$[cite: 221]. Regular on $[1,b]$ since $p=x>0, sigma=(1)/(x)>0$[cite: 220]. 2. Eigenvalues sign: $q=0$ and Dirichlet BCs guarantee $lambda > 0$ strictly[cite: 222].
-3. Transform: Sub $x = e^z arrow.double (dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$ for $z in [0, ln b]$[cite: 223].
-4. Solve: $phi.alt(z) = c_1 cos(sqrt(lambda) z) + c_2 sin(sqrt(lambda) z)$[cite: 223]. BCs dictate $c_1=0$ and $sqrt(lambda) ln b = n pi$[cite: 219, 223].
-*Result:* $lambda_n = ((n pi) / (ln b))^2$ and $phi.alt_n(x) = sin((n pi ln x) / (ln b))$[cite: 223].
+*Question:* Analyze $x^2 (dif^2 phi.alt) / (dif x^2) + x (dif phi.alt) / (dif x) + lambda phi.alt = 0$ on $[1, b]$ with $phi.alt(1)=phi.alt(b)=0$.
+*Steps:* 1. SL Form: Divide by $x arrow.double (dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$. Regular on $[1,b]$ since $p=x>0, sigma=(1)/(x)>0$. 2. Eigenvalues sign: $q=0$ and Dirichlet BCs guarantee $lambda > 0$ strictly.
+3. Transform: Sub $x = e^z arrow.double (dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$ for $z in [0, ln b]$.
+4. Solve: $phi.alt(z) = c_1 cos(sqrt(lambda) z) + c_2 sin(sqrt(lambda) z)$. BCs dictate $c_1=0$ and $sqrt(lambda) ln b = n pi$.
+*Result:* $lambda_n = ((n pi) / (ln b))^2$ and $phi.alt_n(x) = sin((n pi ln x) / (ln b))$.
 
 === Example 17: 1D Wave with Step Velocity
-*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=u(L,t)=0$, $u(x,0)=0$, and $u_t(x,0) = V$ for $x in (0, L/2)$, else $0$[cite: 227, 228, 234].
+*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=u(L,t)=0$, $u(x,0)=0$, and $u_t(x,0) = V$ for $x in (0, L/2)$, else $0$.
 *Steps:*
-1. SOV: $u = phi.alt(x)h(t)$[cite: 235]. Spatial yields $phi.alt_n(x) = sin((n pi x) / (L))$ with $lambda_n = ((n pi) / (L))^2$[cite: 235].
-2. Temporal: $h_n(t) = A_n cos((n pi c t) / (L)) + B_n sin((n pi c t) / (L))$. $u(x,0)=0 arrow.double A_n = 0$[cite: 234, 235].
-3. Apply IC: $(dif u) / (dif t) (x,0) = sum B_n ((n pi c) / (L)) sin((n pi x) / (L)) = g(x)$[cite: 234, 237].
-4. Coeffs: $B_n ((n pi c) / (L)) = (2) / (L) integral_0^(L/2) V sin((n pi x) / (L)) dif x = (2V) / (n pi) (1 - cos((n pi) / (2)))$[cite: 234, 237].
-5. Zero modes: $B_n = 0$ when $cos((n pi)/(2)) = 1 arrow.double n = 4k$[cite: 238].
-*Result:* $u(x,t) = sum_(n=1)^infinity (2V L) / (n^2 pi^2 c) (1 - cos((n pi) / (2))) sin((n pi x) / (L)) sin((n pi c t) / (L))$[cite: 236, 237]. Modes where $n$ is a multiple of $4$ are not excited[cite: 238].
+1. SOV: $u = phi.alt(x)h(t)$. Spatial yields $phi.alt_n(x) = sin((n pi x) / (L))$ with $lambda_n = ((n pi) / (L))^2$.
+2. Temporal: $h_n(t) = A_n cos((n pi c t) / (L)) + B_n sin((n pi c t) / (L))$. $u(x,0)=0 arrow.double A_n = 0$.
+3. Apply IC: $(dif u) / (dif t) (x,0) = sum B_n ((n pi c) / (L)) sin((n pi x) / (L)) = g(x)$.
+4. Coeffs: $B_n ((n pi c) / (L)) = (2) / (L) integral_0^(L/2) V sin((n pi x) / (L)) dif x = (2V) / (n pi) (1 - cos((n pi) / (2)))$.
+5. Zero modes: $B_n = 0$ when $cos((n pi)/(2)) = 1 arrow.double n = 4k$.
+*Result:* $u(x,t) = sum_(n=1)^infinity (2V L) / (n^2 pi^2 c) (1 - cos((n pi) / (2))) sin((n pi x) / (L)) sin((n pi c t) / (L))$. Modes where $n$ is a multiple of $4$ are not excited.
 
 === Example 18: 3D Wave on Circular Slab
-*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $r < a, 0 < z < H$ with zero BCs[cite: 252, 258]. IC: $u = r(a-r) cos theta sin((pi z) / (H))$, $u_t = 0$[cite: 261, 262].
+*Question:* Solve $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $r < a, 0 < z < H$ with zero BCs. IC: $u = r(a-r) cos theta sin((pi z) / (H))$, $u_t = 0$.
 *Steps:*
-1. SOV $u = R(r)Theta(theta)Z(z)T(t)$[cite: 261]. IC dependencies force $Z(z) = sin((pi z) / (H))$ and $Theta(theta) = cos theta$ ($m=1$)[cite: 262].
-2. Radial: $R_k(r) = J_1(sqrt(mu_k) r)$ where $sqrt(mu_k) = (z_(1,k)) / (a)$ to satisfy $u(a)=0$[cite: 257, 261].
-3. Temporal: $(dif^2 T) / (dif t^2) = -c^2 (mu_k + ((pi) / (H))^2) T$[cite: 252]. $u_t=0 arrow.double T_k(t) = cos(omega_k t)$ with $omega_k = c sqrt(((z_(1,k))/(a))^2 + ((pi)/(H))^2)$[cite: 262].
-4. Expand: $u(r,theta,z,t) = cos theta sin((pi z) / (H)) sum A_k J_1((z_(1,k) r) / (a)) cos(omega_k t)$[cite: 261].
-5. IC match: $sum A_k J_1 = r(a-r) arrow.double A_k = (2) / (a^2 J_2^2(z_(1,k))) integral_0^a r(a-r) J_1((z_(1,k) r) / (a)) r dif r$[cite: 262].
-*Result:* Exact 3D series solution defined by $A_k$ expansion, integrating over the initial radial profile[cite: 261, 262].
+1. SOV $u = R(r)Theta(theta)Z(z)T(t)$. IC dependencies force $Z(z) = sin((pi z) / (H))$ and $Theta(theta) = cos theta$ ($m=1$).
+2. Radial: $R_k(r) = J_1(sqrt(mu_k) r)$ where $sqrt(mu_k) = (z_(1,k)) / (a)$ to satisfy $u(a)=0$.
+3. Temporal: $(dif^2 T) / (dif t^2) = -c^2 (mu_k + ((pi) / (H))^2) T$. $u_t=0 arrow.double T_k(t) = cos(omega_k t)$ with $omega_k = c sqrt(((z_(1,k))/(a))^2 + ((pi)/(H))^2)$.
+4. Expand: $u(r,theta,z,t) = cos theta sin((pi z) / (H)) sum A_k J_1((z_(1,k) r) / (a)) cos(omega_k t)$.
+5. IC match: $sum A_k J_1 = r(a-r) arrow.double A_k = (2) / (a^2 J_2^2(z_(1,k))) integral_0^a r(a-r) J_1((z_(1,k) r) / (a)) r dif r$.
+*Result:* Exact 3D series solution defined by $A_k$ expansion, integrating over the initial radial profile.
 
 === Example 19: BVP via Eigenfunctions & Green's
-*Question:* Solve $(dif^2 u) / (dif x^2) + u = f(x)$ with $u(0)=u(L)=0$ ($L eq.not n pi$)[cite: 267, 269, 272]. Compare eigenfunction and Green's function methods for $f(x)=sin((2 pi x) / (L))$[cite: 273, 274, 276].
+*Question:* Solve $(dif^2 u) / (dif x^2) + u = f(x)$ with $u(0)=u(L)=0$ ($L eq.not n pi$). Compare eigenfunction and Green's function methods for $f(x)=sin((2 pi x) / (L))$.
 *Steps:*
-1. Eigenfunction: Let $u = sum a_n sin((n pi x) / (L))$[cite: 273]. Sub in: $sum a_n (1 - ((n pi)/(L))^2) sin((n pi x) / (L)) = f(x)$[cite: 267, 273].
-2. Coeffs: $a_n = (f_n) / (1 - ((n pi)/(L))^2)$ where $f_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x$[cite: 273].
-3. Green's Function: Homogeneous solutions $u_1 = sin x, u_2 = sin(L-x)$[cite: 274]. Wronskian $W = u_1 u_2' - u_1' u_2 = -sin L$[cite: 272, 274].
-4. Form $G$: $G(x,x_0) = (sin x_< sin(L-x_>)) / (sin L)$[cite: 274]. Sol is $u(x) = integral_0^L G(x,x_0) f(x_0) dif x_0$[cite: 274].
-5. Comparison: For $f(x)=sin((2 pi x)/(L))$, eigenfunction method naturally isolates $n=2 arrow.double u(x) = (1) / (1 - ((2 pi)/(L))^2) sin((2 pi x) / (L))$[cite: 275, 276].
-6. Green's integral: $integral_0^L G(x,x_0) sin((2 pi x_0) / (L)) dif x_0$ evaluates to the identical single harmonic term afaict[cite: 275, 276].
-*Result:* Both methods rigorously yield $u(x) = (L^2) / (L^2 - 4 pi^2) sin((2 pi x) / (L))$[cite: 275, 276].
+1. Eigenfunction: Let $u = sum a_n sin((n pi x) / (L))$. Sub in: $sum a_n (1 - ((n pi)/(L))^2) sin((n pi x) / (L)) = f(x)$.
+2. Coeffs: $a_n = (f_n) / (1 - ((n pi)/(L))^2)$ where $f_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x$.
+3. Green's Function: Homogeneous solutions $u_1 = sin x, u_2 = sin(L-x)$. Wronskian $W = u_1 u_2' - u_1' u_2 = -sin L$.
+4. Form $G$: $G(x,x_0) = (sin x_< sin(L-x_>)) / (sin L)$. Sol is $u(x) = integral_0^L G(x,x_0) f(x_0) dif x_0$.
+5. Comparison: For $f(x)=sin((2 pi x)/(L))$, eigenfunction method naturally isolates $n=2 arrow.double u(x) = (1) / (1 - ((2 pi)/(L))^2) sin((2 pi x) / (L))$.
+6. Green's integral: $integral_0^L G(x,x_0) sin((2 pi x_0) / (L)) dif x_0$ evaluates to the identical single harmonic term afaict.
+
+=== Example 20: Non-Equilibrium (Rod with Source)
+*Question:* Find equilibrium for $partial_t u = kappa partial_x^2 u + q$ on $0 < x < L$ with homogeneous Neumann BCs[cite: 318, 323].
+*Steps:*
+1. Sanity check: The rod is insulated but has a constant heat source. The average temperature must grow indefinitely, meaning no true equilibrium can exist unless $q=0$[cite: 324, 331].
+2. Math proof: Force $partial_t u = 0 arrow.double kappa partial_x^2 u + q = 0$.
+3. Integrate: $u_(eq)(x) = -(q) / (2 kappa) x^2 + alpha x + beta$.
+4. Apply BCs: $u_(eq)'(0) = alpha = 0$ and $u_(eq)'(L) = -(q L) / (kappa) + alpha = 0$.
+5. Contradiction: This strictly requires $q=0$, matching the obvious physical reality. 
+* Result: * * No equilibrium exists for $q > 0$ *
+
+=== Example 21: Fourier Series of $e^x$
+*Question:* Determine the Fourier series of $f(x)=e^x$ on $[-L, L]$[cite: 575].
+*Steps:*
+1. Mean value: $a_0 = (1) / (2L) integral_(-L)^L e^x dif x = (e^L - e^(-L)) / (2L)$[cite: 580, 581].
+2. Integration by parts trick: To find $a_n$ and $b_n$, integrate by parts twice; this yields a cyclic equation that you can solve algebraically[cite: 584, 589].
+3. Cosine coeffs: Evaluating the boundary terms gives $a_n = ((-1)^n (e^L - e^(-L))) / (L (1 + ((n pi) / (L))^2))$[cite: 593, 594].
+4. Sine coeffs: The cyclic integration reveals a direct relation, $b_n = -((n pi) / (L)) a_n$[cite: 596, 597].
+*Result:* *Series is $e^x = a_0 + sum (a_n cos((n pi x)/(L)) + b_n sin((n pi x)/(L)))$*[cite: 577]. 
+=== Example 22: Annular Sector Membrane
+*Question:* Find vibration frequencies for the wave eq on $a < r < b$ and $0 < theta < pi/2$ with $u=0$ on all boundaries[cite: 1032].
+*Steps:*
+1. SOV: $u = f(r)g(theta)h(t)$[cite: 1036]. Angular Dirichlet BCs ($g(0)=g(pi/2)=0$) yield $g(theta) = sin(2m theta)$, so the separation constant is $mu = 4m^2$ [cite: 1042-1049].
+2. Radial ODE: The radial equation becomes $r^2 f'' + r f' + (lambda r^2 - 4m^2)f = 0$[cite: 1048].
+3. Basis choice: Because $r=0$ is strictly excluded from the domain ($a>0$), you cannot discard the singular Bessel function[cite: 1051]. The basis must be $f(r) = a_(2m) J_(2m)(sqrt(lambda) r) + b_(2m) Y_(2m)(sqrt(lambda) r)$[cite: 1052].
+4. Apply BCs: Setting $f(a)=f(b)=0$ creates a homogeneous linear system for the coefficients $a_(2m)$ and $b_(2m)$ [cite: 1053-1055].
+5. Determinant condition: For non-trivial solutions, set the determinant to zero[cite: 1056, 1057].
+*Result:* *Frequencies are $omega = (c sqrt(lambda))/(2 pi)$, where roots $lambda$ solve $J_(2m)(sqrt(lambda) a) Y_(2m)(sqrt(lambda) b) = Y_(2m)(sqrt(lambda) a) J_(2m)(sqrt(lambda) b)$*[cite: 1038, 1057].
+
+=== Example 23: Robin BC Stability Boundary
+*Question:* Solve $partial_t u = k partial_x^2 u$ with $u(0)=0$ and $u'(L) = -h u(L)$[cite: 900]. Check roots for the specific case $h L = -1$[cite: 902].
+*Steps:*
+1. Spatial: $phi'' + lambda phi = 0$ with $phi(0)=0 arrow.double phi(x) = c_2 sin(sqrt(lambda) x)$ [cite: 910-915].
+2. Robin BC: $sqrt(lambda) cos(sqrt(lambda) L) = -h sin(sqrt(lambda) L) arrow.double tan(sqrt(lambda) L) = -(sqrt(lambda))/(h)$[cite: 916, 917].
+3. Check zero-mode ($lambda = 0$): $phi(x) = a x$[cite: 927]. The boundary condition forces $a(1 + h L) = 0$[cite: 929]. This means $\lambda=0$ is a valid eigenvalue iff $h L = -1$[cite: 930].
+4. Late time behavior ($h L = -1$): All modes with $\lambda > 0$ decay exponentially[cite: 938]. Only the linear $\lambda=0$ mode survives the infinite time limit[cite: 938].
+*Result:* *If $h L = -1$, the steady-state approaches $u(x,t) arrow A_0 x$. If $h L > -1$, it decays entirely to $0$* [cite: 937-943].Result:* Both methods rigorously yield $u(x) = (L^2) / (L^2 - 4 pi^2) sin((2 pi x) / (L))$.
