@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FMM - Mathematical Methods for Physics</title>
+  </head>
+  <body>
+    <p>1. Fundamental PDEs</p>
+    <ul>
+      <li>
+        <p><strong>Laplace Eq:</strong></p>
+        <p>(Steady state / Equilibrium)</p>
+      </li>
+      <li>
+        <p><strong>Heat Eq:</strong></p>
+        <p>(Diffusion). Decay:</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Wave Eq:</strong></p>
+        <p>(Oscillation). Sols:</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Helmholtz Eq:</strong></p>
+        <p>. From Wave Eq:</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Poisson Eq:</strong></p>
+        <p>(Inhomogeneous Laplace)</p>
+      </li>
+    </ul>
+    <p>2. Separation of Variables (SOV)</p>
+    <p><strong>Context:</strong> Linear homogeneous PDE + homogeneous BCs.</p>
+    <ol>
+      <li value="1">
+        <p>Assume</p>
+        <p>. Yields</p>
+        <p>ODEs and</p>
+        <p>constants.</p>
+      </li>
+      <li value="2">
+        <p>Substitute &amp; Separate:</p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p>Solve Spatial BVP:</p>
+        <p>with given BCs.</p>
+      </li>
+      <li value="4">
+        <p>Solve Temporal ODE:</p>
+        <p>.</p>
+      </li>
+      <li value="5">
+        <p>Sum Modes:</p>
+        <p>.</p>
+      </li>
+      <li value="6">
+        <p>Apply IC:</p>
+        <p>using Fourier orthogonality.</p>
+      </li>
+    </ol>
+    <p>3. Non-Homogeneous Problems</p>
+    <ul>
+      <li>
+        <p><strong>Splitting Trick:</strong> If multiple non-homo BCs, split</p>
+        <p>where each</p>
+        <p>has only ONE non-homo BC. Sum results.</p>
+      </li>
+      <li>
+        <p><strong>Time-Independent BCs:</strong></p>
+        <p>, where</p>
+        <p>is the equilibrium solution (</p>
+        <p>).</p>
+      </li>
+      <li>
+        <p><strong>Time-Dependent BCs:</strong></p>
+        <p>, where</p>
+        <p>is a simple reference function (e.g.,</p>
+        <p>) matching the BCs.</p>
+      </li>
+      <li>
+        <p><strong><p>Inhomogeneous PDE (</p><p>):</p></strong><span style="white-space: pre-wrap">&#x20;</span>Use <strong>eigenfunction expansion</strong>:</p>
+        <p>. Sub into PDE to get ODEs for</p>
+        <p>.</p>
+      </li>
+    </ul>
+    <p>4. Fourier Series &amp; Orthogonality</p>
+    <ul>
+      <li>
+        <p><strong><p>Double Series (</p><p>):</p></strong></p>
+      </li>
+    </ul>
+    <p>5. Sturm-Liouville (SL) Theory</p>
+    <p><strong>General Form:</strong></p>
+    <ul>
+      <li>
+        <p><strong>Regular 1D:</strong></p>
+        <p>.</p>
+        <p>real/cont.,</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Rayleigh Quotient (Multi-D):</strong></p>
+        <ul>
+          <li>
+            <p>1D (</p>
+            <p>):</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>6. Green’s Functions (Constructing</p>
+    <p>)</p>
+    <p><strong>Definition:</strong></p>
+    <p>with homogeneous BCs.</p>
+    <ul>
+      <li>
+        <p><strong>Direct Method (1D):</strong></p>
+        <ol>
+          <li value="1">
+            <p><strong>Homogeneous:</strong> Solve</p>
+            <p>.</p>
+          </li>
+          <li value="2">
+            <p><strong>BCs:</strong></p>
+            <p>satisfies Left BC,</p>
+            <p>satisfies Right BC.</p>
+          </li>
+          <li value="3">
+            <p><strong>Form:</strong></p>
+          </li>
+          <li value="4">
+            <p><strong>Jump:</strong></p>
+            <p>, where</p>
+            <p>.</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p><strong>Eigenfunction Expansion:</strong></p>
+        <p>, where</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Inhomogeneous BCs:</strong> If</p>
+        <p>:</p>
+        <p>.</p>
+      </li>
+    </ul>
+    <p>7. Standard ODE Solutions</p>
+    <table>
+      <tr>
+        <td><strong>Geom</strong></td>
+        <td><strong>Equation Form</strong></td>
+        <td><strong>General Solutions</strong></td>
+        <td><strong>Regularity</strong></td>
+      </tr>
+      <tr>
+        <td>
+          <p>Rect.</p>
+        </td>
+        <td></td>
+        <td>
+          <p><br></p>
+          <p><br></p>
+        </td>
+        <td>
+          <p>(Dir.)</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Cyl.</p>
+        </td>
+        <td></td>
+        <td>
+          <p><br></p>
+          <p>(</p>
+          <p>)<br></p>
+        </td>
+        <td>
+          <p>If</p>
+          <p>: no</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Sph.</p>
+        </td>
+        <td></td>
+        <td>
+          <p><br></p>
+        </td>
+        <td>
+          <p>If</p>
+          <p>: no</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Sph.</p>
+        </td>
+        <td></td>
+        <td>
+          <p><br></p>
+        </td>
+        <td>
+          <p>If</p>
+          <p>: discard</p>
+        </td>
+      </tr>
+    </table>
+    <p>8. Practical Tips &amp; Tricks</p>
+    <ul>
+      <li>
+        <p><strong>Regularity:</strong> If</p>
+        <p>, discard singular solutions (</p>
+        <p>).</p>
+      </li>
+      <li>
+        <p><strong>Late Time:</strong> Only the mode with the <strong>smallest</strong></p>
+        <p>survives.</p>
+      </li>
+      <li>
+        <p><strong>Equilibrium:</strong> Set</p>
+        <p>(Heat) or</p>
+        <p>(Wave)</p>
+        <p>solve</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Fredholm:</strong></p>
+        <p>has sol iff</p>
+        <p>for zero-modes</p>
+        <p>.</p>
+      </li>
+    </ul>
+    <p>9. Shortcuts &amp; Universal Solving Steps</p>
+    <ul>
+      <li>
+        <p><strong>Coord. Change:</strong> (Cauchy-Euler)</p>
+        <p>. Sub</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong><p>Eigenvalues (</p><p>):</p></strong><span style="white-space: pre-wrap">&#x20;</span>Check</p>
+        <p>(e.g. Neumann BCs). Check</p>
+        <p>(e.g.</p>
+        <p>).</p>
+      </li>
+      <li>
+        <p><strong>Bessel Zeros:</strong></p>
+        <p>. Small</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Logic for Basis:</strong></p>
+        <p>;</p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong><p>Fourier-Bessel (</p><p>):</p></strong></p>
+        <p>.</p>
+      </li>
+      <li>
+        <p><strong>Orthogonality:</strong></p>
+        <p>.</p>
+        <p>.</p>
+        <p>(if</p>
+        <p>:</p>
+        <p>).</p>
+      </li>
+      <li><strong>Sanity Checks:</strong> 1. Units. 2. Symmetry. 3. BC Match. 4. Equilibrium.</li>
+    </ul>
+    <p>Worked Examples (Step-by-Step)</p>
+    <p>Example 1: Conceptual &amp; Shorties</p>
+    <p><strong><p>(a) Cosine series</p><p>:</p></strong><span style="white-space: pre-wrap">&#x20;</span>Find series for</p>
+    <p>on</p>
+    <p>. Extend evenly to</p>
+    <p>, then periodically. Result: continuous parabola segments. <strong>(b) Sine series continuity:</strong> Continuous iff</p>
+    <p>is continuous AND</p>
+    <p>. <strong>(c) Fredholm Alt:</strong></p>
+    <p>. Zero-mode</p>
+    <p>. Check</p>
+    <p>. Since zero, sol exists (but not unique).</p>
+    <p>Example 2: 2D Heat Rectangle</p>
+    <p>on</p>
+    <p>. BCs:</p>
+    <p>(insul);</p>
+    <p>(zero).</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong></p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Eigenvalues:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Coeffs:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="4">
+        <p><strong>Dominant:</strong></p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 3: Cauchy-Euler SL</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Form:</strong> Multiply by</p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Rayleigh:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Solve:</strong></p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 4: Damped Wave (Friction)</p>
+    <p>(</p>
+    <p>).</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Roots:</strong></p>
+        <p>where</p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Cases:</strong> Small</p>
+        <p>Overdamped (Pure decay). Large</p>
+        <p>Underdamped (Oscillatory decay).</p>
+      </li>
+    </ol>
+    <p>Example 5: Quarter Disk Membrane</p>
+    <p>on</p>
+    <p>.</p>
+    <p>on all boundaries.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Theta:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Radial:</strong></p>
+        <p>. BC</p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Freqs:</strong></p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 6: Poisson &amp; Green (Rectangle)</p>
+    <p>,</p>
+    <p>, others zero.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Bulk:</strong></p>
+        <p>where</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Boundary:</strong></p>
+        <p>via SOV (</p>
+        <p>in</p>
+        <p>,</p>
+        <p>in</p>
+        <p>).</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 7: Inhomog. Heat &amp; Avg Temp</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Ref:</strong></p>
+        <p>to fix non-homo BCs.</p>
+      </li>
+      <li value="2">
+        <p><strong>Expansion:</strong></p>
+        <p>. ODE:</p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Avg Temp:</strong></p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 8: Thick Spherical Shell</p>
+    <p>on</p>
+    <p>.</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong> Only</p>
+        <p>survives due to symmetry.</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Match:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="3">
+        <p><strong>Trick:</strong></p>
+        <p>grouping for</p>
+        <p>.</p>
+      </li>
+      <li value="4">
+        <p><strong>Result:</strong></p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 9: Wave Eq Resonance</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Ref:</strong></p>
+        <p>.</p>
+        <p>has source</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Resonance:</strong> If</p>
+        <p>, then</p>
+        <p>grows as</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 10: Stability &amp; Robin BC</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Instability:</strong> If</p>
+        <p>, then</p>
+        <p>exists (</p>
+        <p>intersection)</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 11: Mixed BCs (1D Wave)</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>Eigenvalues:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong><p>Large</p><p>:</p></strong></p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 12: Heat Eq in Disk</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong></p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Dominant:</strong></p>
+        <p>mode with</p>
+        <p>.</p>
+      </li>
+    </ol>
+    <p>Example 13: Mixed Heat Rod</p>
+    <p>.</p>
+    <ol>
+      <li value="1">
+        <p><strong>SOV:</strong></p>
+        <p>.</p>
+        <p>.</p>
+      </li>
+      <li value="2">
+        <p><strong>Late Time:</strong></p>
+        <p>.</p>
+      </li>
+    </ol>
+  </body>
+</html>
