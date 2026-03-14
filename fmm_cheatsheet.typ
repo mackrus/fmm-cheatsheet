@@ -42,10 +42,11 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (integral_V f phi.alt_n si
   $f(x,y) approx sum_(n,m) A_(n m) phi.alt_n (x) psi_m (y)$
   $A_(n m) = (integral integral f phi.alt_n psi_m sigma dif x dif y) / (integral integral phi.alt_n^2 psi_m^2 sigma dif x dif y)$
 
-== 5. Sturm-Liouville (SL) Theory
+== 5. Sturm-Liouville (SL) Theory & Operators
 #section_rule
-*General Form:* $nabla dot (p nabla phi.alt) - q phi.alt + lambda sigma phi.alt = 0$
-- *Regular 1D:* $-(p phi.alt')' + q phi.alt = lambda sigma phi.alt$. $p, q, sigma$ real/cont., $p, sigma > 0$.
+*L-Operator:* $L[u] = nabla dot (p nabla u) - q u = -lambda sigma u$.
+- $L$ is *Self-Adjoint* if $integral_V (u L[v] - v L[u]) dif V = 0$.
+- *Regular 1D Form:* $-(p phi.alt')' + q phi.alt = lambda sigma phi.alt$. $p, q, sigma$ real/cont., $p, sigma > 0$.
 - *Rayleigh Quotient (Multi-D):*
   $lambda = (-integral_S p phi.alt nabla phi.alt dot bold(n) dif S + integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V) / (integral_V phi.alt^2 sigma dif V)$
   - 1D ($x in [a,b]$): $lambda = ([-p phi.alt phi.alt']_a^b + integral_a^b [p (phi.alt')^2 + q phi.alt^2] dif x) / (integral_a^b phi.alt^2 sigma dif x)$
