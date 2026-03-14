@@ -1,0 +1,41 @@
+name: Deploy Cheatsheet
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Typst
+        uses: chataigner/setup-typst@v1
+        
+      - name: Compile PDF
+        run: typst compile fmm_cheatsheet.typ fmm_cheatsheet.pdf
+        
+      - name: Create index.html
+        run: |
+          echo '<!DOCTYPE html><html><body style="margin:0"><embed src="fmm_cheatsheet.pdf" type="application/pdf" width="100%" height="100vh" style="height:100vh"></body></html>' > index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
