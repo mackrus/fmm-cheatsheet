@@ -470,12 +470,12 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 *Result:* The integral evaluates to $[ (15x^7) / (16) - (25x^5) / (16) + (13x^3) / (16) - (3x) / (16) ]_(-1)^1 = 0$.
 
 === Example 25: Spherical Laplace (Sphere)
-*Question:* Solve $nabla^2 Phi.alt = 0$ inside and outside a sphere of radius $R$ where $Phi.alt(R, phi.alt, theta) = cos^2 phi.alt$.
+*Question:* Solve $nabla^2 Phi = 0$ inside and outside a sphere of radius $R$ where $Phi(R, phi.alt, theta) = cos^2 phi.alt$.
 *Steps:*
 1. Symmetry: No $theta$ dependence implies $m=0$. Angular part solved by $P_l (cos phi.alt)$.
 2. Radial: Euler eq yields $f(r) = c_1 r^l + c_2 r^(-l-1)$. Discard $r^(-l-1)$ inside, $r^l$ outside.
 3. BC Match: Expand BC as $cos^2 phi.alt = (2) / (3) P_2 (cos phi.alt) + (1) / (3) P_0 (cos phi.alt)$.
-*Result:* $Phi.alt_("in") = (1) / (3) P_0 + (2) / (3) ((r) / (R))^2 P_2$, $Phi.alt_("out") = (1) / (3) ((R) / (r)) P_0 + (2) / (3) ((R) / (r))^3 P_2$.
+*Result:* $Phi_("in") = (1) / (3) P_0 + (2) / (3) ((r) / (R))^2 P_2$, $Phi_("out") = (1) / (3) ((R) / (r)) P_0 + (2) / (3) ((R) / (r))^3 P_2$.
 
 === Example 26: Heat Eq Equilibrium & Consistency
 *Question:* Find equilibrium for $(dif u) / (dif t) = k (dif^2 u) / (dif x^2) + Q(x)$ given BCs $(dif u) / (dif x) (0)=alpha, (dif u) / (dif x) (L)=beta$.
