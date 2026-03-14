@@ -150,6 +150,15 @@
 3. *Expand:* $v = sum a_n(t) phi.alt_n (bold(r))$ using spatial eigenfunctions.
 4. *ODE:* Solve for $a_n(t)$ via Integrating Factor.
 
+== 16. Common Mistakes
+- *The Weight:* Don't forget $sigma(x)$ in inner products $chevron.l f | phi.alt_n chevron.r = integral f phi.alt_n sigma dif x$.
+- *Green's BCs:* $G$ *must* satisfy homogeneous BCs even if the original $u$ is inhomogeneous.
+- *Normalization:* Don't forget the denominator $integral phi.alt_n^2 sigma$ in Fourier coefficients.
+- *Jacobians:* Don't forget the $r$ in $r dif r dif theta$ or $rho^2 sin theta$ in spherical integration.
+- *Zero Modes:* Don't forget the $n=0$ case (constant solution) for Neumann BCs.
+- *Singularity:* Discarding $Y_m, K_m, r^(-n)$ only if the origin $r=0$ is *actually in* the domain.
+- *Phase Shift:* $u(L)=0$ for $(dif^2 X) / (dif x^2) + lambda X = 0$ is $X_n = sin(sqrt(lambda)(L-x))$.
+
 == Worked Examples
 
 === Fourier & SL Theory
