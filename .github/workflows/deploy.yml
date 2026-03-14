@@ -27,7 +27,33 @@ jobs:
         
       - name: Create index.html
         run: |
-          echo '<!DOCTYPE html><html><body style="margin:0"><embed src="fmm_cheatsheet.pdf" type="application/pdf" width="100%" height="100vh" style="height:100vh"></body></html>' > index.html
+          cat << 'EOF' > index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>FMM Cheatsheet</title>
+              <style>
+                  * { box-sizing: border-box; }
+                  body { margin: 0; display: flex; flex-direction: column; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #1a1a1a; }
+                  header { background: #24292e; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10; }
+                  .title { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em; }
+                  .download-btn { background: #2ea44f; color: white; text-decoration: none; padding: 6px 16px; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: background 0.2s; border: 1px solid rgba(27,31,35,0.15); }
+                  .download-btn:hover { background: #2c974b; }
+                  .download-btn:active { background: #298e46; }
+                  iframe { flex-grow: 1; border: none; width: 100%; height: 100%; background: #525659; }
+              </style>
+          </head>
+          <body>
+              <header>
+                  <div class="title">FMM - Mathematical Methods for Physics</div>
+                  <a href="fmm_cheatsheet.pdf" download="fmm_cheatsheet.pdf" class="download-btn">⬇ Download PDF</a>
+              </header>
+              <iframe src="fmm_cheatsheet.pdf"></iframe>
+          </body>
+          </html>
+          EOF
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
