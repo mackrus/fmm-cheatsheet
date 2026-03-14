@@ -47,9 +47,10 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (integral_V f phi.alt_n si
 *L-Operator:* $L[u] = nabla dot (p nabla u) - q u = -lambda sigma u$.
 - $L$ is *Self-Adjoint* if $integral_V (u L[v] - v L[u]) dif V = 0$.
 - *Regular 1D Form:* $-(p phi.alt')' + q phi.alt = lambda sigma phi.alt$. $p, q, sigma$ real/cont., $p, sigma > 0$.
-- *Rayleigh Quotient (Multi-D):*
-  $lambda = (-integral_S p phi.alt nabla phi.alt dot bold(n) dif S + integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V) / (integral_V phi.alt^2 sigma dif V)$
-  - 1D ($x in [a,b]$): $lambda = ([-p phi.alt phi.alt']_a^b + integral_a^b [p (phi.alt')^2 + q phi.alt^2] dif x) / (integral_a^b phi.alt^2 sigma dif x)$
+- *Rayleigh Quotient (Multi-D):* $lambda = (N_S + N_V) / D$
+  $N_S = -integral_S p phi.alt (nabla phi.alt dot bold(n)) dif S, D = integral_V phi.alt^2 sigma dif V$
+  $N_V = integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V$
+- *1D ($x in [a,b]$):* $N_S = [-p phi.alt phi.alt']_a^b, N_V = integral_a^b [p (phi.alt')^2 + q phi.alt^2] dif x$
 
 == 6. Green's Functions (Constructing $G$)
 #section_rule
