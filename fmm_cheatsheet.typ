@@ -3,7 +3,7 @@
 #show: cheatsheet.with(
   title: "FMM - Mathematical Methods for Physics",
   lang: "en",
-  columns: 4,
+  columns: 3,
 )
 
 == 1. Fundamental PDEs
@@ -57,7 +57,7 @@
 == 7. Standard ODE Solutions
 #set text(size: 4.5pt)
 #table(
-  columns: (0.4fr, 1.1fr, 1.5fr, 0.8fr),
+  columns: (0.4fr, 1.4fr, 1.4fr, 0.8fr),
   inset: 3pt,
   fill: (x, y) => if y == 0 { rgb("#e3f2fd") },
   [*Geom*], [*Equation Form*], [*General Solutions*], [*Regularity*],
@@ -77,8 +77,8 @@
   [If $0 in V$: no $y_n, rho^(-(n+1))$],
 
   [Sph. $theta$],
-  [$((1-x^2)g')' + (lambda - dots)g = 0$],
-  [$lambda = n(n+1)$\ $g = A P_n^m (cos theta) + B Q_n^m (cos theta)$],
+  [$((1-x^2)g')' + (n(n+1) - m^2/(1-x^2))g = 0$],
+  [$x = cos theta$\ $g = A P_n^m (x) + B Q_n^m (x)$],
   [If $0, pi in V$: discard $Q_n^m$],
 )
 #set text(size: 5pt)
