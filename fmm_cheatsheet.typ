@@ -195,9 +195,6 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 
 #pagebreak()
 
-== Worked Examples (Step-by-Step)
-#section_rule
-
 #example(
   "Fourier Series & Fredholm",
   [
