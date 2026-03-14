@@ -25,6 +25,9 @@ jobs:
       - name: Compile PDF
         run: typst compile fmm_cheatsheet.typ fmm_cheatsheet.pdf
         
+      - name: Compile Preview Images
+        run: typst compile fmm_cheatsheet.typ page-{n}.png --ppi 200
+
       - name: Create index.html
         run: |
           cat << 'EOF' > index.html
@@ -36,13 +39,15 @@ jobs:
               <title>FMM Cheatsheet</title>
               <style>
                   * { box-sizing: border-box; }
-                  body { margin: 0; display: flex; flex-direction: column; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #1a1a1a; }
-                  header { background: #24292e; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10; }
+                  body { margin: 0; display: flex; flex-direction: column; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #1a1a1a; color: #eee; }
+                  header { background: #24292e; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10; position: sticky; top: 0; }
                   .title { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em; }
                   .download-btn { background: #2ea44f; color: white; text-decoration: none; padding: 6px 16px; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: background 0.2s; border: 1px solid rgba(27,31,35,0.15); }
                   .download-btn:hover { background: #2c974b; }
-                  .download-btn:active { background: #298e46; }
-                  iframe { flex-grow: 1; border: none; width: 100%; height: 100%; background: #525659; }
+                  main { flex-grow: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; -webkit-overflow-scrolling: touch; }
+                  .page-container { max-width: 1000px; width: 100%; position: relative; }
+                  img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 4px; background: white; }
+                  .page-label { position: absolute; top: -10px; left: 10px; background: #444; color: #fff; padding: 2px 8px; font-size: 0.7rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
               </style>
           </head>
           <body>
@@ -50,7 +55,16 @@ jobs:
                   <div class="title">FMM - Mathematical Methods for Physics</div>
                   <a href="fmm_cheatsheet.pdf" download="fmm_cheatsheet.pdf" target="_blank" rel="noopener" class="download-btn">⬇ Download PDF</a>
               </header>
-              <iframe src="fmm_cheatsheet.pdf" scrolling="yes"></iframe>
+              <main>
+                  <div class="page-container">
+                      <div class="page-label">Side 1 / Page 1</div>
+                      <img src="page-1.png" alt="Cheatsheet Page 1">
+                  </div>
+                  <div class="page-container">
+                      <div class="page-label">Side 2 / Page 2</div>
+                      <img src="page-2.png" alt="Cheatsheet Page 2">
+                  </div>
+              </main>
           </body>
           </html>
           EOF
