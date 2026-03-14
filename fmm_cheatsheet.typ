@@ -216,9 +216,11 @@
     Analyze $x^2 (dif^2 phi.alt) / (dif x^2) + x (dif phi.alt) / (dif x) + lambda phi.alt = 0$ on $[1, b]$ with $phi.alt(1)=phi.alt(b)=0$.
   ],
   [
-    1. SL Form: Divide by $x arrow.double (dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$. Regular on $[1,b]$ since $p=x>0, sigma=(1)/(x)>0$. 2. Eigenvalues sign: $q=0$ and Dirichlet BCs guarantee $lambda > 0$ strictly.
+    1. SL Form: Divide by $x arrow.double (dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$. Regular on $[1,b]$ since $p=x>0, sigma=1/x>0$.
+    2. Eigenvalues sign: $q=0$ and Dirichlet BCs guarantee $lambda > 0$ strictly.
     3. Transform: Sub $x = e^z arrow.double (dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$ for $z in [0, ln b]$.
-    4. Solve: $phi.alt(z) = c_1 cos(sqrt(lambda) z) + c_2 sin(sqrt(lambda) z)$. BCs dictate $c_1=0$ and $sqrt(lambda) ln b = n pi$.
+    4. Solve: $phi.alt(z) = c_1 cos(sqrt(lambda) z) + c_2 sin(sqrt(lambda) z)$.
+    5. BCs: $x=1 arrow z=0 arrow c_1=0$. $x=b arrow z=ln b arrow sqrt(lambda) ln b = n pi$.
   ],
   [
     $lambda_n = ((n pi) / (ln b))^2$ and $phi.alt_n(x) = sin((n pi ln x) / (ln b))$.
@@ -301,7 +303,8 @@
     1. Radial: $r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + lambda r^2 R = 0 arrow.double R(r) = A J_0(sqrt(lambda) r) + B Y_0(sqrt(lambda) r)$.
     2. Regularity: $R(0)$ finite arrow.double $B=0$. BC: $R(a) = J_0(sqrt(lambda) a) = 0 arrow.double sqrt(lambda) = (z_("0,k")) / (a)$.
     3. Expansion: $u(r,t) = sum A_k J_0((z_("0,k") r) / (a)) e^(-kappa lambda_k t)$.
-    4. Coeffs: $A_k = (chevron.l f | J_0 chevron.r) / (chevron.l J_0 | J_0 chevron.r) = (integral_0^a f J_0 r dif r) / (integral_0^a J_0^2 r dif r)$.
+    4. IC Match: $u(r,0) = sum A_k J_0((z_("0,k") r) / (a)) = f(r)$.
+    5. Coeffs: Multiply by weight $r J_0$ and integrate to isolate $A_k$: \ $A_k = (chevron.l f | J_0 chevron.r) / (chevron.l J_0 | J_0 chevron.r) = (integral_0^a f(r) J_0((z_("0,k") r) / (a)) r dif r) / (integral_0^a J_0^2((z_("0,k") r) / (a)) r dif r)$.
   ],
   [
     $u(r,t) = sum A_k J_0((z_("0,k") r) / (a)) e^(-kappa ((z_("0,k")) / (a))^2 t)$.
@@ -533,8 +536,9 @@
     2. Bulk: Expand $u_("bulk") = sum_("n,m") A_("n,m") sin((n pi x) / (L)) sin((m pi y) / (H))$.
     3. Sub into PDE: $sum A_("n,m") (-lambda_("n,m")) sin phi.alt_n sin psi_m = f(x,y)$.
     4. $A_("n,m") = (-1) / (lambda_("n,m")) (chevron.l f | sin phi.alt_n sin psi_m chevron.r) / (chevron.l sin phi.alt_n sin psi_m | sin phi.alt_n sin psi_m chevron.r)$.
-    5. Bound: $u_("bound") = sum B_n sin((n pi x) / (L)) sinh((n pi y) / (L))$.
-    6. BC: $u_("bound")(x,H) = sum B_n sin((n pi x) / (L)) sinh((n pi H) / (L)) = g(x) arrow.double B_n = (g_n) / (sinh((n pi H) / (L)))$.
+    5. Bound PDE: $nabla^2 u_("bound") = 0$. $Y$-ODE yields $cosh, sinh$. $u(x,0)=0 arrow$ keep $sinh$.
+    6. Bound Form: $u_("bound") = sum B_n sin((n pi x) / (L)) sinh((n pi y) / (L))$.
+    7. BC Match: $u_("bound")(x,H) = sum [B_n sinh((n pi H) / (L))] sin((n pi x) / (L)) = g(x) arrow.double B_n = (g_n) / (sinh((n pi H) / (L)))$.
   ],
   [
     $u = u_("bulk") + u_("bound")$.
@@ -569,8 +573,8 @@
     2. Coeffs: $a_n = (f_n) / (1 - ((n pi)/(L))^2)$ where $f_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x$.
     3. Green's Function: Homogeneous solutions $u_1 = sin x, u_2 = sin(L-x)$. Wronskian $W = u_1 u_2' - u_1' u_2 = -sin L$.
     4. Form $G$: $G(x,x_0) = (sin x_< sin(L-x_>)) / (sin L)$. Sol is $u(x) = integral_0^L G(x,x_0) f(x_0) dif x_0$.
-    5. Comparison: For $f(x)=sin((2 pi x)/(L))$, eigenfunction method naturally isolates $n=2 arrow.double u(x) = (1) / (1 - ((2 pi)/(L))^2) sin((2 pi x) / (L))$.
-    6. Green's integral: $integral_0^L G(x,x_0) sin((2 pi x_0) / (L)) dif x_0$ evaluates to the identical single harmonic term afaict.
+    5. Comparison: For $f(x)=sin((2 pi x)/(L))$, eigenfunction method isolates $n=2 arrow.double u(x) = (1) / (1 - ((2 pi)/(L))^2) sin((2 pi x) / (L))$.
+    6. Green's integral: Integrating $G(x,x_0) sin((2 pi x_0) / (L))$ explicitly recovers the exact same pure $sin((2 pi x) / (L))$ term.
   ],
   [
     Identical solutions from both methods.
@@ -585,7 +589,8 @@
   [
     1. Symmetry: No $theta$ dependence implies $m=0$. Angular part solved by $P_l (cos phi.alt)$.
     2. Radial: Euler eq yields $f(r) = c_1 r^l + c_2 r^(-l-1)$. Discard $r^(-l-1)$ inside, $r^l$ outside.
-    3. BC Match: Expand BC as $cos^2 phi.alt = (2) / (3) P_2 (cos phi.alt) + (1) / (3) P_0 (cos phi.alt)$.
+    3. Legendre BC: Need $cos^2 phi.alt$. Recall $P_2(x) = (3x^2 - 1)/2 arrow.double x^2 = (2 P_2 + 1)/3$.
+    4. Match: $Phi(R) = c_1 R^2 P_2 + c_0 R^0 P_0 = (2) / (3) P_2 + (1) / (3) P_0$. Solve for coefficients.
   ],
   [
     $Phi_("in") = (1) / (3) P_0 + (2) / (3) ((r) / (R))^2 P_2$, $Phi_("out") = (1) / (3) ((R) / (r)) P_0 + (2) / (3) ((R) / (r))^3 P_2$.
@@ -599,7 +604,8 @@
   ],
   [
     1. Solve: $(dif^2 G) / (dif x^2) = delta(x-x_0)$. $u_< = a x$ (at 0), $u_> = b$ (at L).
-    2. Match: Continuity $a x_0 = b$. Jump $0 - a = 1 arrow.double a = -1$.
+    2. Continuity at $x_0$: $u_<(x_0) = u_>(x_0) arrow.double a x_0 = b$.
+    3. Jump Condition: $u_>'(x_0) - u_<'(x_0) = (1) / (p(x_0)) arrow.double 0 - a = 1/1 arrow.double a = -1$.
   ],
   [
     $G(x,x_0) = -x$ for $x < x_0$, and $-x_0$ for $x > x_0$.
