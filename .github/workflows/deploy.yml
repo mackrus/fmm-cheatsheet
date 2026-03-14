@@ -48,9 +48,9 @@ jobs:
           <body>
               <header>
                   <div class="title">FMM - Mathematical Methods for Physics</div>
-                  <a href="fmm_cheatsheet.pdf" download="fmm_cheatsheet.pdf" class="download-btn">⬇ Download PDF</a>
+                  <a href="fmm_cheatsheet.pdf" download="fmm_cheatsheet.pdf" target="_blank" rel="noopener" class="download-btn">⬇ Download PDF</a>
               </header>
-              <iframe src="fmm_cheatsheet.pdf"></iframe>
+              <iframe src="fmm_cheatsheet.pdf" scrolling="yes"></iframe>
           </body>
           </html>
           EOF
