@@ -39,7 +39,7 @@
 #section_rule
 $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r) = (integral_V f phi.alt_n sigma dif V) / (integral_V phi.alt_n^2 sigma dif V)$
 - *Double Series ($x in [0,L], y in [0,H]$):*
-  $f(x,y) approx sum_(n,m) A_(n,m) phi.alt_n psi_m arrow.double A_(n,m) = (chevron.l f | phi.alt_n psi_m chevron.r) / (chevron.l phi.alt_n psi_m | phi.alt_n psi_m chevron.r) = (integral integral f phi.alt_n psi_m sigma dif x dif y) / (integral integral phi.alt_n^2 psi_m^2 sigma dif x dif y)$
+  $f(x,y) approx sum_("n,m") A_("n,m") phi.alt_n psi_m arrow.double A_("n,m") = (chevron.l f | phi.alt_n psi_m chevron.r) / (chevron.l phi.alt_n psi_m | phi.alt_n psi_m chevron.r) = (integral integral f phi.alt_n psi_m sigma dif x dif y) / (integral integral phi.alt_n^2 psi_m^2 sigma dif x dif y)$
 - *The Trick (Ensuring $n=m$):* To isolate $c_m$ in $f = sum c_n phi.alt_n$:
   1. Take inner product with $phi.alt_m$: $chevron.l f | phi.alt_m chevron.r = chevron.l sum c_n phi.alt_n | phi.alt_m chevron.r$
   2. Use linearity: $chevron.l f | phi.alt_m chevron.r = sum c_n chevron.l phi.alt_n | phi.alt_m chevron.r$
@@ -166,7 +166,7 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 - *Bessel:* $(dif) / (dif x) (x^n J_n(x)) = x^n J_(n-1)(x)$ and $(dif) / (dif x) (x^(-n) J_n(x)) = -x^(-n) J_(n+1)(x)$
   - $integral x J_0(x) dif x = x J_1(x)$
 - *Legendre:* $P_n(1)=1, P_n(-1)=(-1)^n, P_0=1, P_1=x, P_2 = (1) / (2) (3x^2-1)$
-  - *Orthogonality:* $integral_(-1)^1 P_n (x) P_m (x) dif x = (2) / (2n+1) delta_(n,m)$
+  - *Orthogonality:* $integral_(-1)^1 P_n (x) P_m (x) dif x = (2) / (2n+1) delta_("n,m")$
 
 == 13. Mathematical Toolkit
 #section_rule
@@ -191,7 +191,7 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 1. *Homogenize BCs:* Find a simple $w(bold(r))$ that satisfies the BCs. Let $v = u - w$.
 2. *New PDE:* $v$ satisfies $L[v] = f - L[w]$ with *homogeneous* BCs.
 3. *Expand:* Let $v = sum a_n(t) phi.alt_n (bold(r))$, where $phi.alt_n$ are eigenfunctions of the *spatial* part.
-4. *ODE:* Plug into PDE $\to (dif a_n) / (dif t) + k lambda_n a_n(t) = f_n(t)$ (for Heat). Solve via Integrating Factor.
+4. *ODE:* Plug into PDE arrow.double $(dif a_n) / (dif t) + k lambda_n a_n(t) = f_n(t)$ (for Heat). Solve via Integrating Factor.
 
 #pagebreak()
 
@@ -199,108 +199,165 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (chevron.l f | phi.alt_n c
 #section_rule
 
 === Example 1: Fourier Series & Fredholm
-*Question:* (a) Cos series for $x^2$ on $[0,1]$, (b) Sine series continuity, (c) Fredholm Alt for $(dif^2 u) / (dif x^2) + 4u = cos x, ((dif u) / (dif x))(0)=((dif u) / (dif x))(pi)=0$.
+*Question:* (a) Find the Fourier cosine series for $f(x)=x^2$ on $[0,1]$. (b) Determine the condition for sine series continuity. (c) Use Fredholm Alternative to check if $(dif^2 u) / (dif x^2) + 4u = cos x$ with $u'(0)=u'(pi)=0$ has a solution.
+
 *Steps:*
-1. Cos series: $f(x)=x^2$ even, $L=1$. $a_0 = integral_0^1 x^2 dif x = (1) / (3)$. $a_n = 2 integral_0^1 x^2 cos(n pi x) dif x$.
-2. Sine series: Requires *odd* extension to be continuous $arrow f(0)=f(L)=0$.
-3. Fredholm: Zero-mode $phi.alt_h = cos(2x)$. Sol exists if $integral_0^pi (cos x) cos(2x) dif x = 0$.
-*Result:* (a) $a_n = (4(-1)^n) / (n^2 pi^2)$. (c) Integral is $0 arrow$ solution exists.
+1. (a) Cosine series means even extension, $L=1$. $a_0 = (1) / (L) integral_0^L f(x) dif x = (1) / (1) integral_0^1 x^2 dif x = [ (x^3) / (3) ]_0^1 = (1) / (3)$.
+2. $a_n = (2) / (L) integral_0^L f(x) cos((n pi x) / (L)) dif x = 2 integral_0^1 x^2 cos(n pi x) dif x$. Integrate by parts twice:
+  $a_n = 2 [ (x^2 sin(n pi x)) / (n pi) ]_0^1 - 4 integral_0^1 (x sin(n pi x)) / (n pi) dif x = 0 - (4) / (n pi) [ -(x cos(n pi x)) / (n pi) + (sin(n pi x)) / (n^2 pi^2) ]_0^1$.
+3. Evaluate: $a_n = (4 cos(n pi)) / (n^2 pi^2) = (4 (-1)^n) / (n^2 pi^2)$.
+4. (b) Sine series uses odd extension. For continuity, we need $f$ continuous on $[0,L]$ and $f(0) = f(L) = 0$ to avoid jumps at the extension boundaries.
+5. (c) Homogeneous: $(dif^2 phi.alt) / (dif x^2) + 4 phi.alt = 0 arrow.double phi.alt(x) = A cos(2x) + B sin(2x)$.
+6. BCs: $phi.alt'(0) = 2B = 0 arrow.double B=0$. $phi.alt'(pi) = -2A sin(2 pi) = 0 arrow.double A$ is free. Zero-mode $phi.alt_h = cos(2x)$.
+7. Fredholm: Solution exists if $chevron.l cos x | cos(2x) chevron.r = integral_0^pi cos x cos(2x) dif x = 0$.
+8. Integral: $integral_0^pi (1) / (2) (cos(3x) + cos x) dif x = [ (1) / (2) ((sin(3x)) / (3) + sin x) ]_0^pi = 0$.
+
+*Result:* (a) $f(x) = (1) / (3) + sum_(n=1)^(infinity) ((4 (-1)^n) / (n^2 pi^2)) cos(n pi x)$. (b) Continuous iff $f(0)=f(L)=0$. (c) Solution exists.
 
 === Example 2: 2D Heat Rectangle
-*Question:* Solve $(dif u) / (dif t) = k nabla^2 u$ on $[0,L] times [0,H]$ with $u_x(0)=u_x(L)=0$ and $u(0)=u(H)=0$.
+*Question:* Solve $(dif u) / (dif t) = k nabla^2 u$ on $[0,L] times [0,H]$ with $((dif u) / (dif x))(0)=((dif u) / (dif x))(L)=0$ and $u(x,0,t)=u(x,H,t)=0$.
+
 *Steps:*
-1. $u = X(x)Y(y)T(t) arrow ((dif^2 X) / (dif x^2)) / (X) + ((dif^2 Y) / (dif y^2)) / (Y) = ((dif T) / (dif t)) / (k T) = -lambda$.
-2. BCs $X$: $((dif X) / (dif x))(0)=((dif X) / (dif x))(L)=0 arrow X_n = cos((n pi x) / (L)), lambda_x = ((n pi) / (L))^2$.
-3. BCs $Y$: $Y(0)=Y(H)=0 arrow Y_m = sin((m pi y) / (H)), lambda_y = ((m pi) / (H))^2$.
-4. $T(t) = e^(-k(lambda_x + lambda_y) t)$. Dominant mode is $n=0, m=1$.
-*Result:* $u_(n,m) = cos((n pi x) / (L)) sin((m pi y) / (H)) e^(-k lambda_(n,m) t)$.
+1. SOV $u(x,y,t) = X(x)Y(y)T(t) arrow.double ((dif T) / (dif t)) / (k T) = ((dif^2 X) / (dif x^2)) / (X) + ((dif^2 Y) / (dif y^2)) / (Y) = -lambda$.
+2. Spatial $X$: $(dif^2 X) / (dif x^2) + lambda_x X = 0 arrow.double X(x) = A cos(sqrt(lambda_x) x) + B sin(sqrt(lambda_x) x)$.
+3. BCs: $X'(0) = sqrt(lambda_x) B = 0 arrow.double B=0$. $X'(L) = -A sqrt(lambda_x) sin(sqrt(lambda_x) L) = 0 arrow.double sqrt(lambda_x) = (n pi) / (L)$.
+4. Spatial $Y$: $(dif^2 Y) / (dif y^2) + lambda_y Y = 0 arrow.double Y(y) = C cos(sqrt(lambda_y) y) + D sin(sqrt(lambda_y) y)$.
+5. BCs: $Y(0) = C = 0$. $Y(H) = D sin(sqrt(lambda_y) H) = 0 arrow.double sqrt(lambda_y) = (m pi) / (H)$.
+6. Temporal: $(dif T) / (dif t) = -k (lambda_x + lambda_y) T arrow.double T(t) = E e^(-k lambda_("n,m") t)$.
+
+*Result:* $u_("n,m") = cos((n pi x) / (L)) sin((m pi y) / (H)) e^(-k lambda_("n,m") t)$ where $lambda_("n,m") = ((n pi) / (L))^2 + ((m pi) / (H))^2$.
 
 === Example 3: Cauchy-Euler Sturm-Liouville
 *Question:* Solve $x^2 (dif^2 phi.alt) / (dif x^2) + x (dif phi.alt) / (dif x) + lambda phi.alt = 0$ on $[1, b]$ with $phi.alt(1)=phi.alt(b)=0$.
+
 *Steps:*
-1. SL-Form: $(dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0$. $p=x, sigma= (1) / (x)$.
-2. Sub $x = e^z arrow z = ln x$. Yields $(dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$.
-3. $phi.alt(0)=0 arrow phi.alt(z) = B sin(sqrt(lambda) z)$.
-4. $phi.alt(ln b)=0 arrow sqrt(lambda) ln b = n pi$.
-*Result:* $phi.alt_n (x) = sin((n pi ln x) / (ln b))$, $lambda_n = ((n pi) / (ln b))^2$.
+1. SL-Form: $(dif) / (dif x) (x (dif phi.alt) / (dif x)) + (lambda) / (x) phi.alt = 0 arrow.double p=x, sigma=(1) / (x)$.
+2. Transform $x = e^z arrow.double z = ln x$. ODE becomes $(dif^2 phi.alt) / (dif z^2) + lambda phi.alt = 0$.
+3. General sol: $phi.alt(z) = A cos(sqrt(lambda) z) + B sin(sqrt(lambda) z)$.
+4. BC at $x=1 (z=0)$: $phi.alt(0) = A(1) + B(0) = 0 arrow.double A=0$.
+5. BC at $x=b (z=ln b)$: $phi.alt(ln b) = B sin(sqrt(lambda) ln b) = 0 arrow.double sqrt(lambda) ln b = n pi$.
+
+*Result:* $phi.alt_n (x) = sin((n pi ln x) / (ln b))$ with $lambda_n = ((n pi) / (ln b))^2$.
 
 === Example 4: Damped Wave (Friction)
-*Question:* Solve $rho (dif^2 u) / (dif t^2) = T_0 (dif^2 u) / (dif x^2) + beta (dif u) / (dif t)$ with $u(0)=u(L)=0$.
+*Question:* Solve $rho (dif^2 u) / (dif t^2) = T_0 (dif^2 u) / (dif x^2) + beta (dif u) / (dif t)$ with $u(0,t)=u(L,t)=0$.
+
 *Steps:*
-1. SOV: $u=X(x)T(t) arrow X_n = sin((n pi x) / (L)), lambda_n = ((n pi) / (L))^2$.
-2. Temporal: $(dif^2 T) / (dif t^2) - (beta) / (rho) (dif T) / (dif t) + ((lambda_n T_0) / (rho)) T = 0$.
-3. Solve $r^2 - (beta) / (rho) r + omega_0^2 = 0$.
-*Result:* $u$ decays as $e^( (beta t) / (2 rho) )$. Underdamped for large $n$ (oscillates).
+1. SOV $u = X(x)T(t) arrow.double ((dif^2 X) / (dif x^2)) / (X) = (rho (dif^2 T) / (dif t^2) - beta (dif T) / (dif t)) / (T_0 T) = -lambda$.
+2. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
+3. BCs: $X(0) = A = 0$. $X(L) = B sin(sqrt(lambda) L) = 0 arrow.double sqrt(lambda) = (n pi) / (L)$.
+4. Temporal: $rho (dif^2 T) / (dif t^2) - beta (dif T) / (dif t) + T_0 lambda_n T = 0$.
+5. Char Eq: $rho r^2 - beta r + T_0 lambda_n = 0 arrow.double r = (beta plus.minus sqrt(beta^2 - 4 rho T_0 lambda_n)) / (2 rho)$.
+
+*Result:* $u_n(x,t) = sin((n pi x) / (L)) e^((beta t) / (2 rho)) (dots)$. Motion is underdamped if $beta^2 < 4 rho T_0 lambda_n$.
 
 === Example 5: Quarter Disk Membrane
-*Question:* Find frequencies for $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $0 < theta < (pi) / (2), 0 < r < b, u=0$ on boundaries.
+*Question:* Find frequencies for $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $0 < theta < (pi) / (2), 0 < r < b$ with $u=0$ on all boundaries.
+
 *Steps:*
-1. Angular: $Theta(0)=Theta((pi) / (2))=0 arrow Theta_m = sin(2 m theta), mu = (2m)^2$.
-2. Radial: $r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + (lambda r^2 - (2m)^2)R = 0 arrow R = J_(2m)(sqrt(lambda) r)$.
-3. BC: $R(b)=0 arrow sqrt(lambda) b = z_(2m,k) arrow omega = (c z_(2m,k)) / (b)$.
-*Result:* $omega_(m,k) = (c z_(2m,k)) / (b)$. Fundamental is $m=1, k=1$.
+1. SOV $u = R(r)Theta(theta)T(t) arrow.double ((dif^2 Theta) / (dif theta^2)) / (Theta) = -mu$.
+2. Angular: $(dif^2 Theta) / (dif theta^2) + mu Theta = 0 arrow.double Theta(theta) = A cos(sqrt(mu) theta) + B sin(sqrt(mu) theta)$.
+3. BCs: $Theta(0) = A = 0$. $Theta((pi) / (2)) = B sin(sqrt(mu) (pi) / (2)) = 0 arrow.double sqrt(mu) = 2m$.
+4. Radial: $r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + (lambda r^2 - (2m)^2) R = 0$.
+5. General Sol: $R(r) = C J_(2m)(sqrt(lambda) r) + D Y_(2m)(sqrt(lambda) r)$.
+6. Regularity: $R(0)$ finite arrow.double $D = 0$.
+7. BC: $R(b) = C J_(2m)(sqrt(lambda) b) = 0 arrow.double sqrt(lambda) = (z_("2m,k")) / (b)$.
+
+*Result:* $omega_("m,k") = (c z_("2m,k")) / (b)$. Fundamental mode is $m=1, k=1$.
 
 === Example 6: Poisson Eq (Inhomogeneity)
-*Question:* Solve $nabla^2 u = f(x,y)$ on rectangle with $u(x,H)=g(x)$ and others zero.
+*Question:* Solve $nabla^2 u = f(x,y)$ on rectangle $[0,L] times [0,H]$ with $u(x,H)=g(x)$ and other boundaries zero.
+
 *Steps:*
-1. Split $u = u_("bulk") + u_("bound")$. $nabla^2 u_b = f$ (BCs 0) and $nabla^2 u_s = 0$ ($u_s(H)=g$).
-2. Bulk: $u_b = sum A_(n,m) sin((n pi x) / (L)) sin((m pi y) / (H))$ where $A_(n,m) = (-f_(n,m)) / (lambda_(n,m))$.
-3. Bound: $u_s = sum B_n sin((n pi x) / (L)) sinh((n pi y) / (L))$ where $B_n = (g_n) / (sinh((n pi H) / (L)))$.
-*Result:* $u = u_("bulk") + u_("boundary")$.
+1. Split $u = u_("bulk") + u_("bound")$. $nabla^2 u_("bulk") = f$ (zero BCs) and $nabla^2 u_("bound") = 0$ ($u_("bound")(x,H)=g(x)$).
+2. Bulk: Expand $u_("bulk") = sum_("n,m") A_("n,m") sin((n pi x) / (L)) sin((m pi y) / (H))$.
+3. Sub into PDE: $sum A_("n,m") (-lambda_("n,m")) sin phi_n sin psi_m = f(x,y)$.
+4. $A_("n,m") = (-1) / (lambda_("n,m")) (chevron.l f | sin phi_n sin psi_m chevron.r) / (chevron.l sin phi_n sin psi_m | sin phi_n sin psi_m chevron.r)$.
+5. Bound: $u_("bound") = sum B_n sin((n pi x) / (L)) sinh((n pi y) / (L))$.
+6. BC: $u_("bound")(x,H) = sum B_n sin((n pi x) / (L)) sinh((n pi H) / (L)) = g(x) arrow.double B_n = (g_n) / (sinh((n pi H) / (L)))$.
+
+*Result:* $u = u_("bulk") + u_("bound")$.
 
 === Example 7: Inhomog. Heat & Avg Temp
-*Question:* Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2) + Q(x,t)$ with $u(0)=T_1, u(L)=T_2$.
+*Question:* Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2) + Q(x,t)$ with $u(0,t)=T_1, u(L,t)=T_2$.
+
 *Steps:*
-1. Shift: $v = u - [T_1 + ((T_2-T_1)x) / (L)]$. New PDE: $(dif v) / (dif t) = kappa (dif^2 v) / (dif x^2) + Q$.
-2. Expand: $v = sum a_n (t) sin((n pi x) / (L)) arrow (dif a_n) / (dif t) + kappa lambda_n a_n = q_n(t)$.
-3. Avg Temp: $(dif T_("avg")) / (dif t) = ((kappa) / (L)) [(dif u) / (dif x)]_0^L + ((1) / (L)) integral_0^L Q dif x$.
-*Result:* $u = w(x) + sum a_n(t) sin((n pi x) / (L))$.
+1. Shift: $w(x) = T_1 + (x) / (L) (T_2 - T_1)$. Let $v = u - w$.
+2. New PDE: $(dif v) / (dif t) = kappa (dif^2 v) / (dif x^2) + Q(x,t)$ with $v(0)=v(L)=0$.
+3. Expand $v = sum a_n (t) sin((n pi x) / (L))$. Sub into PDE arrow.double $sum [a'_n + kappa lambda_n a_n] sin phi_n = Q$.
+4. ODE: $(dif a_n) / (dif t) + kappa lambda_n a_n = q_n(t)$, solve via Integrating Factor $e^(kappa lambda_n t)$.
+5. Avg Temp: $T_("avg") (t) = (1) / (L) integral_0^L u(x,t) dif x$.
+
+*Result:* $u(x,t) = w(x) + sum a_n (t) sin((n pi x) / (L))$.
 
 === Example 8: Thick Spherical Shell
 *Question:* Solve $nabla^2 u = 0$ for $a <= rho <= b$ with $u(a)=0, u(b)=V_0$.
+
 *Steps:*
-1. Radial: $(dif) / (dif rho) (rho^2 (dif u) / (dif rho)) = 0 arrow u(rho) = A - (B) / (rho)$.
-2. BCs: $u(a) = A - (B) / (a) = 0$ and $u(b) = A - (B) / (b) = V_0$.
-3. Solve: $A = (B) / (a) arrow B((1) / (a) - (1) / (b)) = V_0$.
-*Result:* $u(rho) = V_0 ((b) / (b-a)) (1 - (a) / (rho))$.
+1. Radial Laplace: $(dif) / (dif rho) (rho^2 (dif u) / (dif rho)) = 0$.
+2. Integrate: $rho^2 (dif u) / (dif rho) = C_1 arrow.double (dif u) / (dif rho) = (C_1) / (rho^2)$.
+3. Integrate again: $u(rho) = -(C_1) / (rho) + C_2$.
+4. BC at $rho=a$: $-(C_1) / (a) + C_2 = 0 arrow.double C_2 = (C_1) / (a)$.
+5. BC at $rho=b$: $-(C_1) / (b) + (C_1) / (a) = V_0 arrow.double C_1 ((b-a) / (a b)) = V_0$.
+6. Solve for constants: $C_1 = (V_0 a b) / (b-a)$ and $C_2 = (V_0 b) / (b-a)$.
+
+*Result:* $u(rho) = (V_0 b) / (b-a) (1 - (a) / (rho))$.
 
 === Example 9: Wave Eq Resonance
 *Question:* Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=0, u(L,t)=sin(omega t)$.
+
 *Steps:*
-1. Ref: $w = ((x) / (L)) sin(omega t)$. $v = u - w arrow (dif^2 v) / (dif t^2) - c^2 (dif^2 v) / (dif x^2) = ((x) / (L)) omega^2 sin(omega t)$.
-2. Expand: $v = sum a_n(t) sin((n pi x) / (L)) arrow (dif^2 a_n) / (dif t^2) + omega_n^2 a_n = q_n sin(omega t)$.
-3. Resonance: If $omega = omega_n = (n pi c) / (L)$, $a_n(t)$ grows linearly with $t$.
-*Result:* $u$ blows up if driving $omega$ matches an eigenfrequency $omega_n$.
+1. Reference: $w(x,t) = (x) / (L) sin(omega t)$. Let $v = u - w$.
+2. New PDE: $(dif^2 v) / (dif t^2) - c^2 (dif^2 v) / (dif x^2) = -(dif^2 w) / (dif t^2) = (x / L) omega^2 sin(omega t)$.
+3. Expand $v = sum a_n(t) sin((n pi x) / (L)) arrow.double a_n'' + omega_n^2 a_n = q_n sin(omega t)$.
+4. Particular: $a_n (t) = (q_n) / (omega_n^2 - omega^2) sin(omega t)$.
+5. Resonance: If $omega arrow omega_n = (n pi c) / (L)$, then $a_n (t) prop t cos(omega_n t)$.
+
+*Result:* $u$ grows linearly if driving $omega$ matches an eigenfrequency $omega_n$.
 
 === Example 10: Stability & Robin BC
-*Question:* Check stability of $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ with $u(0)=0, ((dif u) / (dif x))(L) = -h u(L)$.
+*Question:* Check stability of $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ with $u(0,t)=0, ((dif u) / (dif x))(L,t) = -h u(L,t)$.
+
 *Steps:*
-1. $X = sin(sqrt(lambda) x)$. BC: $sqrt(lambda) cos(sqrt(lambda) L) = -h sin(sqrt(lambda) L)$.
-2. $tan(sqrt(lambda) L) = (-sqrt(lambda)) / (h)$. Let $z = sqrt(lambda) L, tan z = (-z) / (h L)$.
-3. Instability ($lambda < 0$): Occurs if slope of $tan z$ at 0 is less than slope of $(-z) / (h L)$.
-*Result:* Unstable if $1 < (-1) / (h L) arrow h < (-1) / (L)$.
+1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
+2. BC $X(0)=A=0$. Robin BC: $sqrt(lambda) cos(sqrt(lambda) L) = -h sin(sqrt(lambda) L) arrow.double tan(sqrt(lambda) L) = (-sqrt(lambda)) / (h)$.
+3. Stability: We need $lambda > 0$ for decay. If $lambda = -gamma^2 < 0$, then $tanh(gamma L) = (-gamma) / (h)$.
+4. If $h < 0$, let $h = -|h|$. Then $tanh(gamma L) = (gamma) / (|h|)$.
+5. Instability exists if slope of $tanh(gamma L)$ at $0$ is $> (1) / (|h|) arrow.double L > (1) / (|h|)$.
+
+*Result:* Unstable if $h < (-1) / (L)$.
 
 === Example 11: Mixed BCs (1D Wave)
 *Question:* Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0) - ((dif u) / (dif x))(0) = 0, ((dif u) / (dif x))(L) = 0$.
+
 *Steps:*
-1. $X = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
-2. BC1: $X(0) - ((dif X) / (dif x))(0) = A - sqrt(lambda) B = 0 arrow A = sqrt(lambda) B$.
-3. BC2: $((dif X) / (dif x))(L) = -A sqrt(lambda) sin(sqrt(lambda) L) + B sqrt(lambda) cos(sqrt(lambda) L) = 0$.
-4. Combine: $sqrt(lambda) B [sqrt(lambda) sin(sqrt(lambda) L) - cos(sqrt(lambda) L)] = 0$.
-*Result:* $tan(sqrt(lambda) L) = (1) / (sqrt(lambda))$.
+1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
+2. BC at $x=0$: $X(0) - X'(0) = A - sqrt(lambda) B = 0 arrow.double A = sqrt(lambda) B$.
+3. BC at $x=L$: $X'(L) = -A sqrt(lambda) sin(sqrt(lambda) L) + B sqrt(lambda) cos(sqrt(lambda) L) = 0$.
+4. Substitute $A$: $sqrt(lambda) B [ -sqrt(lambda) sin(sqrt(lambda) L) + cos(sqrt(lambda) L) ] = 0$.
+
+*Result:* Eigenvalues satisfy $tan(sqrt(lambda) L) = (1) / (sqrt(lambda))$.
 
 === Example 12: Heat Eq in Disk (Radial)
 *Question:* Solve $(dif u) / (dif t) = kappa nabla^2 u$ on $r <= a$ with $u(a,t)=0, u(r,0)=f(r)$.
+
 *Steps:*
-1. SOV: $u = R(r)T(t) arrow r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + lambda r^2 R = 0 arrow R = J_0(sqrt(lambda) r)$.
-2. BC: $R(a)=0 arrow sqrt(lambda) a = z_(0,k) arrow lambda_k = ((z_(0,k)) / (a))^2$.
-3. IC: $u = sum A_k J_0((z_(0,k) r) / (a)) e^(-kappa lambda_k t)$.
-*Result:* $u(r,t) = sum A_k J_0((z_(0,k) r) / (a)) e^(-kappa ((z_(0,k)) / (a))^2 t)$.
+1. Radial: $r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + lambda r^2 R = 0 arrow.double R(r) = A J_0(sqrt(lambda) r) + B Y_0(sqrt(lambda) r)$.
+2. Regularity: $R(0)$ finite arrow.double $B=0$. BC: $R(a) = J_0(sqrt(lambda) a) = 0 arrow.double sqrt(lambda) = (z_("0,k")) / (a)$.
+3. Expansion: $u(r,t) = sum A_k J_0((z_("0,k") r) / (a)) e^(-kappa lambda_k t)$.
+4. Coeffs: $A_k = (chevron.l f | J_0 chevron.r) / (chevron.l J_0 | J_0 chevron.r) = (integral_0^a f J_0 r dif r) / (integral_0^a J_0^2 r dif r)$.
+
+
+*Result:* $u(r,t) = sum A_k J_0((z_("0,k") r) / (a)) e^(-kappa ((z_("0,k")) / (a))^2 t)$.
 
 === Example 13: Mixed Heat Rod
-*Question:* Solve Heat Eq with one end fixed at 0 and the other insulated.
+*Question:* Solve Heat Eq with $u(0,t)=0$ (fixed) and $((dif u) / (dif x))(L,t)=0$ (insulated).
+
 *Steps:*
-1. Set $u = X(x)T(t)$. $X(0)=0 arrow X = sin(sqrt(lambda) x)$.
-2. Insulated at $x=L arrow ((dif X) / (dif x))(L)=0 arrow cos(sqrt(lambda) L)=0$.
-3. Solve for $lambda arrow sqrt(lambda) L = (n + (1) / (2)) pi$.
-*Result:* $u_(n) = sin(((n + (1) / (2)) pi x) / (L)) e^(-kappa lambda_n t)$.
+1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
+2. BC $X(0) = A = 0$. BC $X'(L) = B sqrt(lambda) cos(sqrt(lambda) L) = 0$.
+3. Solve: $sqrt(lambda) L = (n + (1) / (2)) pi arrow.double lambda_n = (((n + (1) / (2)) pi) / (L))^2$.
+4. Temporal: $T(t) = C e^(-kappa lambda_n t)$.
+
+*Result:* $u_n = sin(((n + (1) / (2)) pi x) / (L)) e^(-kappa lambda_n t)$.
+
