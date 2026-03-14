@@ -55,10 +55,10 @@
   $u = integral G f + [-p alpha (dif G) / (dif x_0)]_(x_0=a) + [p beta (dif G) / (dif x_0)]_(x_0=b)$.
 
 == 7. Standard ODE Solutions
-#set text(size: 4.2pt)
+#set text(size: 4.5pt)
 #table(
   columns: (0.4fr, 1.1fr, 1.5fr, 0.8fr),
-  inset: 1.5pt,
+  inset: 3pt,
   fill: (x, y) => if y == 0 { rgb("#e3f2fd") },
   [*Geom*], [*Equation Form*], [*General Solutions*], [*Regularity*],
   [Rect. $x$],
@@ -97,9 +97,10 @@
 - *Orthogonality:* $integral_0^L sin^2((n pi x) / (L)) = L/2$. $integral_0^pi sin^2(n x) = pi/2$.
 
 == 10. Quick Eigenvalue Table
+#set text(size: 4.5pt)
 #table(
   columns: (1fr, 1.2fr, 1.5fr),
-  inset: 1.5pt,
+  inset: 3pt,
   fill: (x, y) => if y == 0 { rgb("#e3f2fd") },
   [*BCs ($x=0, L$)*],
   [*Eigenvalues ($lambda_n$)*],
@@ -117,6 +118,7 @@
 
   [Periodic], [$((2 n pi) / (L))^2$], [$1, cos, sin$],
 )
+#set text(size: 5pt)
 
 == 11. Coordinate Systems ($nabla^2 u$)
 - *Cylindrical ($r, theta, z$):*
@@ -337,8 +339,8 @@
   [
     1. Sanity check: The rod is insulated but has a constant heat source. The average temperature must grow indefinitely, meaning no true equilibrium can exist unless $q=0$.
     2. Math proof: Force $partial_t u = 0 arrow.double kappa partial_x^2 u + q = 0$.
-    3. Integrate: $u_(eq)(x) = -(q) / (2 kappa) x^2 + alpha x + beta$.
-    4. Apply BCs: $u_(eq)'(0) = alpha = 0$ and $u_(eq)'(L) = -(q L) / (kappa) + alpha = 0$.
+    3. Integrate: $u_("eq")(x) = -(q) / (2 kappa) x^2 + alpha x + beta$.
+    4. Apply BCs: $u_("eq")'(0) = alpha = 0$ and $u_("eq")'(L) = -(q L) / (kappa) + alpha = 0$.
     5. Contradiction: This strictly requires $q=0$, matching the obvious physical reality.
   ],
   [
@@ -357,7 +359,7 @@
     3. Integrate: For $Q=k, u(0)=A, u(L)=B$, $u_("eq") = -(x^2) / (2) + a x + b$.
   ],
   [
-    $u_eq (x) = -(x^2) / (2) + ((B-A) / (L) + (L) / (2)) x + A$.
+    $u_("eq") (x) = -(x^2) / (2) + ((B-A) / (L) + (L) / (2)) x + A$.
   ],
 )
 
@@ -577,7 +579,7 @@
     3. BC Match: Expand BC as $cos^2 phi.alt = (2) / (3) P_2 (cos phi.alt) + (1) / (3) P_0 (cos phi.alt)$.
   ],
   [
-    $Phi_in = (1) / (3) P_0 + (2) / (3) ((r) / (R))^2 P_2$, $Phi_out = (1) / (3) ((R) / (r)) P_0 + (2) / (3) ((R) / (r))^3 P_2$.
+    $Phi_("in") = (1) / (3) P_0 + (2) / (3) ((r) / (R))^2 P_2$, $Phi_("out") = (1) / (3) ((R) / (r)) P_0 + (2) / (3) ((R) / (r))^3 P_2$.
   ],
 )
 

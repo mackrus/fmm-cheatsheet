@@ -56,7 +56,7 @@
     flipped: true,
     numbering: "1",
   )
-  set text(lang: lang, size: 5pt, font: "Linux Libertine")
+  set text(lang: lang, size: 5pt)
   set align(left)
 
   // Headers
