@@ -110,6 +110,62 @@ $f(x) approx sum c_n phi.alt_n (x) arrow.double c_n = (integral_V f phi.alt_n si
 - *Orthogonality:* $integral_0^L sin^2(n pi x / L) = L/2$. $integral_0^pi sin^2(n x) = pi/2$. $integral_0^pi cos^2(n x) = pi/2$ (if $n=0$: $pi$).
 - *Sanity Checks:* 1. Units. 2. Symmetry. 3. BC Match. 4. Equilibrium.
 
+== 10. Quick Eigenvalue Table ($phi.alt'' + lambda phi.alt = 0$)
+#section_rule
+#table(
+  columns: (1fr, 1.2fr, 1.5fr),
+  inset: 2pt,
+  [*BCs ($x=0, L$)*],
+  [*Eigenvalues ($lambda_n$)*],
+  [*Eigenfunctions ($phi.alt_n$)*],
+
+  [Dirichlet (0, 0)], [$(n pi / L)^2$], [$sin(n pi x / L) quad (n=1,2,...)$],
+  [Neumann (0, 0)], [$(n pi / L)^2$], [$cos(n pi x / L) quad (n=0,1,...)$],
+  [Mixed (Dir, Neu)], [$((n+1/2) pi / L)^2$], [$sin((n+1/2) pi x / L)$],
+  [Mixed (Neu, Dir)], [$((n+1/2) pi / L)^2$], [$cos((n+1/2) pi x / L)$],
+  [Periodic], [$(2 n pi / L)^2$], [$1, cos(2 n pi x / L), sin(2 n pi x / L)$],
+)
+
+== 11. Coordinate Systems ($nabla^2 u$)
+#section_rule
+- *Cylindrical ($r, theta, z$):*
+  $nabla^2 u = 1/r partial_r (r partial_r u) + 1/r^2 partial_theta^2 u + partial_z^2 u$
+- *Spherical ($rho, theta, phi.alt$):* ($theta$=polar, $phi.alt$=azimuthal)
+  $nabla^2 u = 1/rho^2 partial_rho (rho^2 partial_rho u) + 1/(rho^2 sin theta) partial_theta (sin theta partial_theta u) + 1/(rho^2 sin^2 theta) partial_phi.alt^2 u$
+  - *Radial only:* $nabla^2 u = (rho u)'' / rho$
+
+== 12. Special Function Identities
+#section_rule
+- *Bessel:* $d / (d x) [x^n J_n(x)] = x^n J_(n-1)(x)$ and $d / (d x) [x^(-n) J_n(x)] = -x^(-n) J_(n+1)(x)$
+  - $integral x J_0(x) dif x = x J_1(x)$
+- *Legendre:* $P_n(1)=1, P_n(-1)=(-1)^n, P_0=1, P_1=x, P_2=1/2(3x^2-1)$
+  - *Orthogonality:* $integral_(-1)^1 P_n (x) P_m (x) dif x = 2 / (2n+1) delta_(n m)$
+
+== 13. Mathematical Toolkit
+#section_rule
+- *Trig:* $sin A cos B = 1/2 [sin(A+B) + sin(A-B)]$
+  - $sin^2 x = (1-cos 2x)/2$, $cos^2 x = (1+cos 2x)/2$
+- *Common Integrals:*
+  - $integral_0^L x sin(n pi x / L) dif x = (-1)^(n+1) L^2 / (n pi)$
+  - $integral_0^L x cos(n pi x / L) dif x = L^2 / (n^2 pi^2) ((-1)^n - 1)$
+  - $integral x^2 sin x dif x = 2x sin x - (x^2-2) cos x$
+
+== 14. Numerical "Must-Haves"
+#section_rule
+- *Bessel Zeros ($J_m(z_{m,k})=0$):*
+  - $J_0: z approx 2.405, 5.520, 8.654$
+  - $J_1: z approx 3.832, 7.016, 10.173$
+- *Values:* $J_0(0)=1, J_n(0)=0$ for $n>0$.
+- *Stirling:* $n! approx sqrt(2 pi n) (n/e)^n$.
+
+== 15. Strategy: Inhomogeneous PDEs
+#section_rule
+*Goal:* Solve $L[u] = f(bold(r), t)$ with BC $u(S) = g(S)$.
+1. *Homogenize BCs:* Find a simple $w(bold(r))$ that satisfies the BCs. Let $v = u - w$.
+2. *New PDE:* $v$ satisfies $L[v] = f - L[w]$ with *homogeneous* BCs.
+3. *Expand:* Let $v = sum a_n(t) phi.alt_n (bold(r))$, where $phi.alt_n$ are eigenfunctions of the *spatial* part.
+4. *ODE:* Plug into PDE $\to a_n'(t) + k lambda_n a_n(t) = f_n(t)$ (for Heat). Solve via Integrating Factor.
+
 #pagebreak()
 
 == Worked Examples (Step-by-Step)
