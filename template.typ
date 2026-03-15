@@ -12,9 +12,9 @@
     outset: (x: 0pt, y: 1pt),
     radius: 1pt,
   )[
-    #set text(size: 4.8pt)
+    #set text(size: 5.0pt)
     *Ex #example_counter.display(): #title* \
-    #set text(size: 4.3pt)
+    #set text(size: 4.5pt)
     *Q:* #question \
     *S:* #steps \
     #block(
@@ -56,13 +56,13 @@
     flipped: true,
     numbering: "1",
   )
-  set text(lang: lang, size: 5pt)
+  set text(lang: lang, size: 5.2pt)
   set align(left)
 
   // Headers
   show heading.where(level: 1): it => block(sticky: true, width: 100%)[
     #set align(center)
-    #set text(size: 8pt, weight: "bold", fill: rgb("#002b5c"))
+    #set text(size: 8.5pt, weight: "bold", fill: rgb("#002b5c"))
     #smallcaps(it.body)
     #v(-0.2cm)
     #line(length: 100%, stroke: 1pt + rgb("#002b5c"))
@@ -70,7 +70,7 @@
   ]
 
   show heading.where(level: 2): it => block(sticky: true, width: 100%)[
-    #set text(size: 6.8pt, weight: "bold", fill: rgb("#004a99"))
+    #set text(size: 7.2pt, weight: "bold", fill: rgb("#004a99"))
     #it.body
     #v(-0.1cm)
     #line(length: 100%, stroke: 0.5pt + gray)
@@ -78,7 +78,7 @@
   ]
 
   show heading.where(level: 3): it => block(sticky: true, width: 100%)[
-    #set text(size: 5.8pt, weight: "bold", fill: rgb("#1a73e8"))
+    #set text(size: 6.2pt, weight: "bold", fill: rgb("#1a73e8"))
     #it.body
     #v(0.02cm)
   ]
