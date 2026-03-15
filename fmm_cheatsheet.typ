@@ -30,9 +30,13 @@
 - *Multiple Non-Zero BCs:* $arrow$ Split $u = u_1 + u_2$ (each gets ONE bad BC).
 
 == 4. Fourier Series & Orthogonality
-#key[$c_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r) = (integral_V f phi.alt_n sigma dif V) / (integral_V phi.alt_n^2 sigma dif V)$]
-- *Double Series ($x in [0,L], y in [0,H]$):*
-  $A_("n,m") = (integral integral f phi.alt_n psi_m sigma dif x dif y) / (integral integral phi.alt_n^2 psi_m^2 sigma dif x dif y)$
+#key[
+  #grid(
+    columns: (1fr, 1.2fr),
+    $c_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r) = (integral_0^L f phi.alt_n sigma dif x) / (integral_0^L phi.alt_n^2 sigma dif x)$,
+    $A_("n,m") = (integral_V f phi.alt_n psi_m sigma dif V) / (integral_V phi.alt_n^2 psi_m^2 sigma dif V)$,
+  )
+]
 - *The Trick:* To isolate $c_m$ in $f = sum c_n phi.alt_n$:
   1. Inner prod with $phi.alt_m$: $chevron.l f | phi.alt_m chevron.r = chevron.l sum c_n phi.alt_n | phi.alt_m chevron.r$
   2. Use linearity: $chevron.l f | phi.alt_m chevron.r = sum c_n chevron.l phi.alt_n | phi.alt_m chevron.r$
@@ -165,6 +169,7 @@
 == 15. Common Mistakes
 - *Weight:* $integral f phi.alt_n sigma dif x$ | *Norm:* Divide by $integral phi.alt_n^2 sigma$ | *Green's:* $G$ has *homo* BCs.
 - *Jacobians:* Remember $r$ or $rho^2 sin theta$ | *Neumann:* Check $n=0$ | *Phase:* $u(L)=0 arrow sin(sqrt(lambda)(L-x))$.
+- *Draining:* If even ONE boundary is $u=0$ (Dirichlet), all heat *must* leak out. The steady state is always $0$ as $t arrow infinity$ (meaning no $lambda=0$ mode exists).
 
 == Examples
 #block(
