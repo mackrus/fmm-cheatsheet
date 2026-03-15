@@ -54,7 +54,7 @@
     columns: columns,
     margin: (x: 0.25cm, y: 0.25cm),
     flipped: true,
-    numbering: "1",
+    numbering: none,
   )
   set text(lang: lang, size: 5.2pt)
   set align(left)
