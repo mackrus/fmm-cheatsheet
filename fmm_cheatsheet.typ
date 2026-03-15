@@ -253,7 +253,7 @@
 )
 
 #example(
-  "Fourier Series of $e^x$",
+  [Fourier Series of $e^x$],
   [
     Determine the Fourier series of $f(x)=e^x$ on $[-L, L]$.
   ],
