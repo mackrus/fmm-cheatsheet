@@ -44,15 +44,18 @@
 - *Rayleigh Quotient:*
   #key[$lambda = (-integral_S p phi.alt nabla phi.alt dot bold(n) dif S + integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V) / (integral_V phi.alt^2 sigma dif V)$]
 
+#let color_green = rgb("#2e7d32")
+#let color_stability = rgb("#d32f2f")
+
 == 6. Green's Functions (Constructing $G$)
 *Definition:* $L[G(bold(r), bold(r)_0)] = delta(bold(r) - bold(r)_0)$ with homogeneous BCs.
 - *Direct Method (1D):*
   $G(x, x_0) = cases(C u_1(x) u_2(x_0) & x < x_0, C u_1(x_0) u_2(x) & x > x_0)$
-  #key[$C = (-1) / (p(x_0) W(u_1, u_2)(x_0))$] where $W = u_1 u_2' - u_1' u_2$.
+  #key(accent: color_green)[$C = (-1) / (p(x_0) W(u_1, u_2)(x_0))$] where $W = u_1 u_2' - u_1' u_2$.
 - *Eigenfunction Expansion:*
   $G(bold(r), bold(r)_0) = sum_n (phi.alt_n (bold(r)) phi.alt_n (bold(r)_0)) / (lambda_n N_n)$
 - *Inhomogeneous BCs ($u(a)=alpha, u(b)=beta$):*
-  $u = integral G f + [-p alpha (dif G) / (dif x_0)]_(x_0=a) + [p beta (dif G) / (dif x_0)]_(x_0=b)$.
+  #key(accent: color_green)[$u = integral G f + [-p alpha (dif G) / (dif x_0)]_(x_0=a) + [p beta (dif G) / (dif x_0)]_(x_0=b)$].
 
 == 7. Standard ODE Solutions
 #set text(size: 4.5pt)
@@ -615,6 +618,7 @@
 === Stability & Robin BCs
 #example(
   "Stability & Robin BC",
+  accent: color_stability,
   [
     Check stability of $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ with $u(0,t)=0, ((dif u) / (dif x))(L,t) = -h u(L,t)$.
   ],
@@ -632,6 +636,7 @@
 
 #example(
   "Robin BC Stability Boundary",
+  accent: color_stability,
   [
     Solve $partial_t u = k partial_x^2 u$ with $u(0)=0$ and $u'(L) = -h u(L)$. Check roots for the specific case $h L = -1$.
   ],

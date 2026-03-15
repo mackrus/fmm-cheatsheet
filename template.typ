@@ -1,13 +1,13 @@
 // Template for dense Typst cheat sheets
 #let example_counter = counter("example")
 
-#let example(title, question, steps, result) = {
+#let example(title, question, steps, result, accent: rgb("#004a99")) = {
   example_counter.step()
   context block(
     breakable: true,
     width: 100%,
     fill: rgb("#f8f9fa"),
-    stroke: (left: 1.5pt + rgb("#004a99")),
+    stroke: (left: 1.5pt + accent),
     inset: (x: 4pt, y: 3pt),
     outset: (x: 0pt, y: 2pt),
     radius: 1pt,
@@ -18,7 +18,7 @@
     *Q:* #question \
     *S:* #steps \
     #block(
-      fill: rgb("#eef4ff"),
+      fill: accent.lighten(90%),
       width: 100%,
       inset: 2pt,
       radius: 1pt,
@@ -27,10 +27,10 @@
   ]
 }
 
-#let key(body) = {
+#let key(body, accent: rgb("#fbc02d")) = {
   rect(
-    fill: rgb("#fffde7"),
-    stroke: 0.5pt + rgb("#fbc02d"),
+    fill: accent.lighten(95%),
+    stroke: 0.5pt + accent,
     width: 100%,
     inset: 3pt,
     radius: 2pt,
