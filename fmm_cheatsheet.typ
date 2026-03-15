@@ -41,8 +41,14 @@
 == 5. Sturm-Liouville (SL) Theory
 *L-Operator:* $L[u] = nabla dot (p nabla u) - q u = -lambda sigma u$.
 - *Regular 1D Form:* $-(dif) / (dif x) (p (dif phi.alt) / (dif x)) + q phi.alt = lambda sigma phi.alt$.
-- *Rayleigh Quotient:*
-  #key[$lambda = (-integral_S p phi.alt nabla phi.alt dot bold(n) dif S + integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V) / (integral_V phi.alt^2 sigma dif V)$]
+- *Rayleigh Quotient (1D & mD):*
+  #key[
+    #grid(
+      columns: (1fr, 1fr),
+      $lambda_("1D") = ([-p phi.alt (dif phi.alt) / (dif x)]_a^b + integral_a^b [p ((dif phi.alt) / (dif x))^2 + q phi.alt^2] dif x) / (integral_a^b phi.alt^2 sigma dif x)$,
+      $lambda_("mD") = (-integral_S p phi.alt nabla phi.alt dot bold(n) dif S + integral_V [p |nabla phi.alt|^2 + q phi.alt^2] dif V) / (integral_V phi.alt^2 sigma dif V)$,
+    )
+  ]
 
 #let color_green = rgb("#2e7d32")
 #let color_stability = rgb("#d32f2f")
