@@ -54,6 +54,10 @@
   #key(accent: color_green)[$C = (-1) / (p(x_0) W(u_1, u_2)(x_0))$] where $W = u_1 u_2' - u_1' u_2$.
 - *Eigenfunction Expansion:*
   $G(bold(r), bold(r)_0) = sum_n (phi.alt_n (bold(r)) phi.alt_n (bold(r)_0)) / (lambda_n N_n)$
+- *Homogeneous Case ($u(S)=0$):*
+  #key(
+    accent: color_green,
+  )[$u(bold(r)) = integral_V G(bold(r), bold(r)_0) f(bold(r)_0) dif V_0$]
 - *Inhomogeneous BCs ($u(a)=alpha, u(b)=beta$):*
   #key(accent: color_green)[$u = integral G f + [-p alpha (dif G) / (dif x_0)]_(x_0=a) + [p beta (dif G) / (dif x_0)]_(x_0=b)$].
 
