@@ -22,12 +22,12 @@
 5. Sum Modes: $u(bold(r), t) = sum c_n X_n (bold(r)) T_n (t)$.
 6. Apply IC: $u(bold(r), 0) = f(bold(r))$ using Fourier orthogonality.
 
-== 3. Non-Homogeneous Problems
-- *Splitting Trick:* If multiple non-homo BCs, split $u = u_1 + u_2 + dots$ where each $u_i$ has only ONE non-homo BC. Sum results.
-- *Time-Independent BCs:* $u(x,t) = v(x,t) + u_E (x)$, where $u_E$ is the equilibrium solution ($(dif u_E) / (dif t) = 0$).
-- *Time-Dependent BCs:* $u(x,t) = v(x,t) + r(x,t)$, where $r(x,t)$ is a simple reference function (e.g., $A + (x) / (L) (B-A)$) matching the BCs.
-- *Inhomogeneous PDE ($L[u] = Q$):* Use *eigenfunction expansion*:
-  $u(x,t) = sum a_n (t) phi.alt_n (x)$. Sub into PDE to get ODEs for $a_n (t)$.
+== 3. The "Is it Homogeneous?" Decision Tree
+- *Zero BCs + Zero Source:* $arrow$ Use standard SOV (Section 2).
+- *Non-Zero Constant BCs:* $arrow$ Find equilibrium $u_E(x)$, let $v = u - u_E$.
+- *Non-Zero Time-Dep BCs:* $arrow$ Find ref function $r(x,t)$, let $v = u - r$.
+- *Non-Zero Source $+Q(x,t)$:* $arrow$ Use Eigenfunction Expansion (Section 15).
+- *Multiple Non-Zero BCs:* $arrow$ Split $u = u_1 + u_2$ (each gets ONE bad BC).
 
 == 4. Fourier Series & Orthogonality
 #key[$c_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r) = (integral_V f phi.alt_n sigma dif V) / (integral_V phi.alt_n^2 sigma dif V)$]
@@ -146,12 +146,7 @@
   - $integral_0^L x sin((n pi x) / (L)) dif x = ((-1)^(n+1) L^2) / (n pi)$
   - $integral_0^L x cos((n pi x) / (L)) dif x = (L^2) / (n^2 pi^2) ((-1)^n - 1)$
 
-== 14. Numerical "Must-Haves"
-- *Bessel Zeros ($J_m(z)=0$):*
-  - $J_0: 2.405, 5.520, 8.654$; $J_1: 3.832, 7.016, 10.173$
-- *Values:* $J_0(0)=1, J_n(0)=0$ for $n>0$.
-
-== 15. Strategy: Inhomogeneous PDEs
+== 14. Strategy: Inhomogeneous PDEs
 *Goal:* Solve $L[u] = f(bold(r), t)$ with BC $u(S) = g(S)$.
 1. *Homogenize BCs:* Find $w(bold(r))$ matching BCs. Let $v = u - w$.
 2. *New PDE:* $L[v] = f - L[w]$ with *homogeneous* BCs.
@@ -161,18 +156,42 @@
   #key(accent: rgb("#1a73e8"))[$u(x) = sum_n (f_n phi.alt_n (x)) / (alpha - lambda_n)$] (Works for $bold(r)$ in multi-D too) \
   where $f_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r)$.
 
-== 16. Common Mistakes
-- *The Weight:* Don't forget $sigma(x)$ in inner products $chevron.l f | phi.alt_n chevron.r = integral f phi.alt_n sigma dif x$.
-- *Green's BCs:* $G$ *must* satisfy homogeneous BCs even if the original $u$ is inhomogeneous.
-- *Normalization:* Don't forget the denominator $integral phi.alt_n^2 sigma$ in Fourier coefficients.
-- *Jacobians:* Don't forget the $r$ in $r dif r dif theta$ or $rho^2 sin theta$ in spherical integration.
-- *Zero Modes:* Don't forget the $n=0$ case (constant solution) for Neumann BCs.
-- *Singularity:* Discarding $Y_m, K_m, r^(-n)$ only if the origin $r=0$ is *actually in* the domain.
-- *Phase Shift:* $u(L)=0$ for $(dif^2 X) / (dif x^2) + lambda X = 0$ is $X_n = sin(sqrt(lambda)(L-x))$.
+== 15. Common Mistakes
+- *Weight:* $integral f phi.alt_n sigma dif x$ | *Norm:* Divide by $integral phi.alt_n^2 sigma$ | *Green's:* $G$ has *homo* BCs.
+- *Jacobians:* Remember $r$ or $rho^2 sin theta$ | *Neumann:* Check $n=0$ | *Phase:* $u(L)=0 arrow sin(sqrt(lambda)(L-x))$.
 
-== Worked Examples
+== Examples
+#block(
+  fill: rgb("#fffde7"),
+  stroke: 0.5pt + rgb("#fbc02d"),
+  inset: 3pt,
+  radius: 2pt,
+  width: 100%,
+)[
+  *Match Keywords:*
+  - *"Find equilibrium/steady"* $arrow$ See Ex: Heat Eq Equilibrium
+  - *"Find vibration freq"* $arrow$ See Ex: Quarter Disk / Annular Membrane
+  - *"Check stability"* $arrow$ See Ex: Stability & Robin BC
+  - *"Compare methods"* $arrow$ See Ex: BVP via Eigenfunctions & Green's
+]
 
 === Fourier & SL Theory
+#example(
+  "Fourier Sine Series of a Step",
+  [
+    Find the sine series for $f(x) = A$ on $(0, L/2)$ and $0$ on $(L/2, L)$. Which coefficients vanish?
+  ],
+  [
+    1. Formula: $b_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x = (2A) / (L) integral_0^(L/2) sin((n pi x) / (L)) dif x$.
+    2. Integrate: $b_n = (2A) / (L) [ -(L) / (n pi) cos((n pi x) / (L)) ]_0^(L/2) = (2A) / (n pi) (1 - cos((n pi) / (2)))$.
+    3. Evaluate modes: $cos((n pi) / (2))$ is $0$ for odd $n$, $-1$ for $n=2, 6, 10$, and $1$ for $n=4, 8, 12$.
+    4. Vanishing condition: $b_n = 0$ when $cos((n pi) / (2)) = 1 arrow.double n = 4k$ for integer $k$.
+  ],
+  [
+    $b_n = (2A) / (n pi) (1 - cos((n pi) / (2)))$. Modes $n=4, 8, 12, dots$ vanish. The first two non-zero terms are $n=1, 2$.
+  ],
+)
+
 #example(
   "Fourier Series & Fredholm",
   [
@@ -202,22 +221,6 @@
     *(a)* $f(x) = (1) / (3) + sum_(n=1)^(infinity) ((4 (-1)^n) / (n^2 pi^2)) cos(n pi x)$. \
     *(b)* Continuous iff $f(x)$ is continuous and $f(0) = f(L) = 0$. \
     *(c)* Since integral is $0$, a solution exists (but is not unique).
-  ],
-)
-
-#example(
-  "Fourier Sine Series of a Step",
-  [
-    Find the sine series for $f(x) = A$ on $(0, L/2)$ and $0$ on $(L/2, L)$. Which coefficients vanish?
-  ],
-  [
-    1. Formula: $b_n = (2) / (L) integral_0^L f(x) sin((n pi x) / (L)) dif x = (2A) / (L) integral_0^(L/2) sin((n pi x) / (L)) dif x$.
-    2. Integrate: $b_n = (2A) / (L) [ -(L) / (n pi) cos((n pi x) / (L)) ]_0^(L/2) = (2A) / (n pi) (1 - cos((n pi) / (2)))$.
-    3. Evaluate modes: $cos((n pi) / (2))$ is $0$ for odd $n$, $-1$ for $n=2, 6, 10$, and $1$ for $n=4, 8, 12$.
-    4. Vanishing condition: $b_n = 0$ when $cos((n pi) / (2)) = 1 arrow.double n = 4k$ for integer $k$.
-  ],
-  [
-    $b_n = (2A) / (n pi) (1 - cos((n pi) / (2)))$. Modes $n=4, 8, 12, dots$ vanish. The first two non-zero terms are $n=1, 2$.
   ],
 )
 

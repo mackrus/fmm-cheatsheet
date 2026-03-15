@@ -4,12 +4,12 @@
 #let example(title, question, steps, result, accent: rgb("#004a99")) = {
   example_counter.step()
   context block(
-    breakable: true,
+    breakable: false,
     width: 100%,
     fill: rgb("#f8f9fa"),
     stroke: (left: 1.5pt + accent),
-    inset: (x: 4pt, y: 3pt),
-    outset: (x: 0pt, y: 2pt),
+    inset: (x: 3pt, y: 2pt),
+    outset: (x: 0pt, y: 1pt),
     radius: 1pt,
   )[
     #set text(size: 4.8pt)
@@ -42,7 +42,7 @@
   title: "Cheat Sheet",
   author: none,
   lang: "sv",
-  columns: 4,
+  columns: 3,
   body,
 ) = {
   if author != none {
@@ -52,7 +52,7 @@
   }
   set page(
     columns: columns,
-    margin: (x: 0.3cm, y: 0.3cm),
+    margin: (x: 0.25cm, y: 0.25cm),
     flipped: true,
     numbering: "1",
   )
@@ -60,26 +60,27 @@
   set align(left)
 
   // Headers
-  show heading.where(level: 1): it => [
+  show heading.where(level: 1): it => block(sticky: true, width: 100%)[
     #set align(center)
-    #set text(size: 9pt, weight: "bold", fill: rgb("#002b5c"))
+    #set text(size: 8pt, weight: "bold", fill: rgb("#002b5c"))
     #smallcaps(it.body)
     #v(-0.2cm)
     #line(length: 100%, stroke: 1pt + rgb("#002b5c"))
-    #v(0.1cm)
-  ]
-
-  show heading.where(level: 2): it => [
-    #set text(size: 7.5pt, weight: "bold", fill: rgb("#004a99"))
-    #it.body
-    #v(-0.1cm)
-    #line(length: 100%, stroke: 0.5pt + gray)
     #v(0.05cm)
   ]
 
-  show heading.where(level: 3): it => [
-    #set text(size: 6.5pt, weight: "bold", fill: rgb("#1a73e8"))
+  show heading.where(level: 2): it => block(sticky: true, width: 100%)[
+    #set text(size: 6.8pt, weight: "bold", fill: rgb("#004a99"))
     #it.body
+    #v(-0.1cm)
+    #line(length: 100%, stroke: 0.5pt + gray)
+    #v(0.02cm)
+  ]
+
+  show heading.where(level: 3): it => block(sticky: true, width: 100%)[
+    #set text(size: 5.8pt, weight: "bold", fill: rgb("#1a73e8"))
+    #it.body
+    #v(0.02cm)
   ]
 
   body
