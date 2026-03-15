@@ -155,7 +155,10 @@
 1. *Homogenize BCs:* Find $w(bold(r))$ matching BCs. Let $v = u - w$.
 2. *New PDE:* $L[v] = f - L[w]$ with *homogeneous* BCs.
 3. *Expand:* $v = sum a_n(t) phi.alt_n (bold(r))$ using spatial eigenfunctions.
-4. *ODE:* Solve for $a_n(t)$ via Integrating Factor.
+4. *ODE:* Sub sum into PDE $arrow$ get $(dif a_n) / (dif t) + k lambda_n a_n = f_n(t)$. Solve via Int. Factor $e^(k lambda_n t)$.
+- *Explicit Steady Sol ($L[u] + alpha u = f$):*
+  #key(accent: rgb("#1a73e8"))[$u(x) = sum_n (f_n phi.alt_n (x)) / (alpha - lambda_n)$] (Works for $bold(r)$ in multi-D too) \
+  where $f_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r)$.
 
 == 16. Common Mistakes
 - *The Weight:* Don't forget $sigma(x)$ in inner products $chevron.l f | phi.alt_n chevron.r = integral f phi.alt_n sigma dif x$.
