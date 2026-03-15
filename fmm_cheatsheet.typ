@@ -52,6 +52,7 @@
 - *Direct Method (1D):*
   $G(x, x_0) = cases(C u_1(x) u_2(x_0) & x < x_0, C u_1(x_0) u_2(x) & x > x_0)$
   #key(accent: color_green)[$C = (-1) / (p(x_0) W(u_1, u_2)(x_0))$] where $W = u_1 u_2' - u_1' u_2$.
+- *Finding $C$ manually:* Match at $x=x_0$: 1. $G_<=G_>$ (Cont.) and 2. $G_>' - G_< ' = (1)/(p(x_0))$ (Jump).
 - *Eigenfunction Expansion:*
   $G(bold(r), bold(r)_0) = sum_n (phi.alt_n (bold(r)) phi.alt_n (bold(r)_0)) / (lambda_n N_n)$
 - *Homogeneous Case ($u(S)=0$):*
