@@ -6,14 +6,14 @@
   columns: 3,
 )
 
-== 1. Fundamental PDEs
+== Fundamental PDEs <pdes>
 - *Laplace Eq:* $nabla^2 u = 0$ (Steady state / Equilibrium)
 - *Heat Eq:* $(partial u) / (partial t) = k nabla^2 u$ (Diffusion). Decay: $e^(-k lambda t)$.
 - *Wave Eq:* $(partial^2 u) / (partial t^2) = c^2 nabla^2 u$ (Oscillation). Sols: $cos(omega t), sin(omega t)$.
 - *Helmholtz Eq:* $nabla^2 psi + k^2 psi = 0$. From Wave Eq: $u(bold(r), t) = psi(bold(r)) e^(-i omega t)$.
 - *Poisson Eq:* $nabla^2 u = f(bold(r))$ (Inhomogeneous Laplace)
 
-== 2. Separation of Variables (SOV)
+== Separation of Variables (SOV) <sov>
 *Context:* Linear homogeneous PDE + homogeneous BCs.
 1. Assume $u(bold(r), t) = X(bold(r))T(t)$. Yields $N$ ODEs and $N-1$ constants.
 2. Substitute & Separate: $((dif T) / (dif t)) / (k T) = (nabla^2 X) / (X) = -lambda$.
@@ -22,14 +22,14 @@
 5. Sum Modes: $u(bold(r), t) = sum c_n X_n (bold(r)) T_n (t)$.
 6. Apply IC: $u(bold(r), 0) = f(bold(r))$ using Fourier orthogonality.
 
-== 3. The "Is it Homogeneous?" Decision Tree
-- *Zero BCs + Zero Source:* $arrow$ Use standard SOV (Section 2).
+== The "Is it Homogeneous?" Decision Tree <decision-tree>
+- *Zero BCs + Zero Source:* $arrow$ Use standard SOV (@sov).
 - *Non-Zero Constant BCs:* $arrow$ Find equilibrium $u_E(x)$, let $v = u - u_E$ (so $v$ has homo BCs).
 - *Non-Zero Time-Dep BCs:* $arrow$ Find ref function $r(x,t)$, let $v = u - r$ (so $v$ has homo BCs).
-- *Non-Zero Source $+Q(x,t)$:* $arrow$ Use Eigenfunction Expansion (Section 15).
+- *Non-Zero Source $+Q(x,t)$:* $arrow$ Use Eigenfunction Expansion (@inhomogeneous).
 - *Multiple Non-Zero BCs:* $arrow$ Split $u = u_1 + u_2$ (each gets ONE bad BC).
 
-== 4. Fourier Series & Orthogonality
+== Fourier Series & Orthogonality <fourier>
 #key[
   #grid(
     columns: (1fr, 1.2fr),
@@ -42,7 +42,7 @@
   2. Use linearity: $chevron.l f | phi.alt_m chevron.r = sum c_n chevron.l phi.alt_n | phi.alt_m chevron.r$
   3. Orthogonality: Only $c_m chevron.l phi.alt_m | phi.alt_m chevron.r$ survives.
 
-== 5. Sturm-Liouville (SL) Theory
+== Sturm-Liouville (SL) Theory <sl-theory>
 *L-Operator:* $L[u] = nabla dot (p nabla u) - q u = -lambda sigma u$.
 - *Regular 1D Form:* $-(dif) / (dif x) (p (dif phi.alt) / (dif x)) + q phi.alt = lambda sigma phi.alt$.
 - *Rayleigh Quotient (1D & mD):*
@@ -57,7 +57,7 @@
 #let color_green = rgb("#2e7d32")
 #let color_stability = rgb("#d32f2f")
 
-== 6. Green's Functions (Constructing $G$)
+== Green's Functions (Constructing $G$) <greens>
 *Definition:* $L[G(bold(r), bold(r)_0)] = delta(bold(r) - bold(r)_0)$ with homogeneous BCs.
 - *Direct Method (1D):*
   $G(x, x_0) = cases(C u_1(x) u_2(x_0) & x < x_0, C u_1(x_0) u_2(x) & x > x_0)$
@@ -73,7 +73,7 @@
 - *Inhomogeneous BCs ($u(a)=alpha, u(b)=beta$):*
   #key(accent: color_green)[$u = integral G f dif x_0 + [-p alpha (partial G) / (partial x_0)]_(x_0=a) + [p beta (partial G) / (partial x_0)]_(x_0=b)$].
 
-== 7. Standard ODE Solutions
+== Standard ODE Solutions <ode-solutions>
 #set text(size: 4.5pt)
 #table(
   columns: (0.4fr, 1.4fr, 1.4fr, 0.8fr),
@@ -102,20 +102,20 @@
 )
 #set text(size: 5pt)
 
-== 8. Practical Tips & Tricks
+== Practical Tips & Tricks <tips>
 - *Regularity:* If $|u(0)| < infinity$, discard singular solutions ($Y_m, K_m, Q_n^m, ln r, r^(-n)$).
 - *Late Time:* Only the mode with the *smallest* $lambda > 0$ survives.
 - *Equilibrium:* Set $(partial u) / (partial t) = 0$ (Heat) or $(partial^2 u) / (partial t^2) = 0$ (Wave) $arrow$ solve $nabla^2 u = f$.
 - *Fredholm:* $L[u]=f$ has sol iff $integral f phi.alt_h sigma dif x = 0$ for zero-modes $phi.alt_h$.
 
-== 9. Shortcuts & Solving Steps
+== Shortcuts & Solving Steps <shortcuts>
 - *Coord. Change:* $x^2 phi.alt'' + x phi.alt' + lambda phi.alt = 0 arrow phi.alt'' (z) + lambda phi.alt(z) = 0$ ($x = e^z$).
 - *Eigenvalues ($lambda$):* Check $lambda=0$ (Neumann). Check $lambda<0$ (Robin $h < 0$).
 - *Logic for Basis:* $u(0)=0 arrow sin$; $u'(0)=0 arrow cos$. $u(L)=0 arrow sin(sqrt(lambda)(L-x))$.
 - *Fourier-Bessel ($J_m$):* $A_k = ((2) / (a^2 J_(m+1)^2 (z_(m,k)))) integral_0^a f(r) J_m(z_(m,k) r/a) r dif r$.
 - *Orthogonality:* $integral_0^L sin^2((n pi x) / (L)) = L/2$. $integral_0^pi sin^2(n x) = pi/2$.
 
-== 10. Quick Eigenvalue Table
+== Quick Eigenvalue Table <eigenvalue-table>
 #set text(size: 4.5pt)
 #table(
   columns: (1fr, 1.2fr, 1.5fr),
@@ -139,14 +139,14 @@
 )
 #set text(size: 5pt)
 
-== 11. Coordinate Systems ($nabla^2 u$)
+== Coordinate Systems ($nabla^2 u$) <coords>
 - *Cylindrical ($r, theta, z$):*
   #key[$nabla^2 u = ((1) / (r)) (partial) / (partial r) (r (partial u) / (partial r)) + ((1) / (r^2)) (partial^2 u) / (partial theta^2) + (partial^2 u) / (partial z^2)$]
 - *Spherical ($rho, theta, phi.alt$):*
   #key[$nabla^2 u = ((1) / (rho^2)) (partial) / (partial rho) (rho^2 (partial u) / (partial rho)) + ((1) / (rho^2 sin theta)) (partial) / (partial theta) (sin theta (partial u) / (partial theta)) + ((1) / (rho^2 sin^2 theta)) (partial^2 u) / (partial phi.alt^2)$]
   - *Radial only:* $nabla^2 u = (((partial^2) / (partial rho^2)) (rho u)) / (rho)$
 
-== 12. Special Function Identities
+== Special Function Identities <special-functions>
 - *Bessel:* $(x^n J_n)' = x^n J_(n-1)$ and $(x^(-n) J_n)' = -x^(-n) J_(n+1)$
 - *Legendre:* $P_0=1, P_1=x, P_2 = 1/2 (3x^2-1)$. $integral_(-1)^1 P_n^2 = 2/(2n+1)$.
 
@@ -162,17 +162,20 @@
   ],
 )
 
-== 14. Strategy: Inhomogeneous PDEs
+== Strategy: Inhomogeneous PDEs <inhomogeneous>
 *Goal:* Solve $L[u] = f(bold(r), t)$ with BC $u(S) = g(S)$.
-1. *Homogenize BCs:* Find $w(bold(r))$ matching BCs. Let $v = u - w$.
-2. *New PDE:* $L[v] = f - L[w]$ with *homogeneous* BCs.
-3. *Expand:* $v = sum a_n(t) phi.alt_n (bold(r))$ using spatial eigenfunctions.
-4. *ODE:* Sub sum into PDE $arrow$ get $(dif a_n) / (dif t) + k lambda_n a_n = f_n(t)$.
-  - *Solve:* Multiply by Int. Factor $e^(k lambda_n t)$ and integrate: $a_n(t) = e^(-k lambda_n t) integral e^(k lambda_n t) f_n(t) dif t$.
+1. *Homogenize BCs (if non-zero):* Find $w(bold(r))$ matching BCs. Let $v = u - w$. (If BCs are already homo, $v=u, w=0$).
+2. *New PDE:* $L[v] = f - L[w]$ with *homogeneous* BCs. (If $w=0$, then $L[v] = f$).
+*Goal:* Solve $L[u] = f(bold(r), t)$ with BC $u(S) = g(S)$. (Note: $f$ is the source term, often $Q$).
+...
+4. *ODE:* Sub sum into PDE to get an ODE for $a_n(t)$ driven by source coeffs $f_n(t)$:
+  - *Heat:* $(dif a_n) / (dif t) + k lambda_n a_n = f_n(t) arrow$ Solve via Int. Factor $e^(k lambda_n t)$.
+  - *Wave:* $(dif^2 a_n) / (dif t^2) + c^2 lambda_n a_n = f_n(t) arrow$ Solve via undetermined coeffs (resonance if driving $omega approx c sqrt(lambda_n)$).
 - *Explicit Steady Sol ($L[u] + alpha u = f$):*
-  #key(accent: rgb("#1a73e8"))[$u(x) = sum_n (f_n phi.alt_n (x)) / (alpha - lambda_n)$] (Works for $bold(r)$ in multi-D too) \
-  where $f_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r)$.
-
+  #key(accent: rgb(
+    "#1a73e8",
+  ))[$u(x) = sum_n (f_n phi.alt_n (x)) / (alpha - lambda_n)$] \
+  where $f_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r)$ are the expansion coeffs of the source $f$.
 #infobox(
   "Common Mistakes & Traps",
   accent: rgb("#d32f2f"),
@@ -186,7 +189,7 @@
   ],
 )
 
-== Examples
+== Examples <examples>
 #infobox("Match Keywords to Examples", accent: rgb("#fbc02d"), [
   - *"Find equilibrium/steady"* $arrow$ See Ex: Heat Eq Equilibrium
   - *"Find vibration freq"* $arrow$ See Ex: Quarter Disk / Annular Membrane

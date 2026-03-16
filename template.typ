@@ -73,32 +73,68 @@
     flipped: true,
     numbering: none,
   )
+  set heading(numbering: (..nums) => {
+    let n = nums.pos()
+    if n.len() == 1 {
+      numbering("1.", n.at(0))
+    } else if n.len() == 2 {
+      if n.at(0) == 0 {
+        numbering("1.", n.at(1))
+      } else {
+        numbering("1.1", ..n)
+      }
+    } else if n.len() == 3 {
+      if n.at(0) == 0 {
+        numbering("1.1", ..n.slice(1))
+      } else {
+        numbering("1.1.1", ..n)
+      }
+    }
+  })
   set text(lang: lang, size: 5.2pt)
   set align(left)
 
   // Headers
-  show heading.where(level: 1): it => block(sticky: true, width: 100%)[
-    #set align(center)
-    #set text(size: 8.5pt, weight: "bold", fill: rgb("#002b5c"))
-    #smallcaps(it.body)
-    #v(-0.2cm)
-    #line(length: 100%, stroke: 1pt + rgb("#002b5c"))
-    #v(0.05cm)
-  ]
-
-  show heading.where(level: 2): it => block(sticky: true, width: 100%)[
-    #set text(size: 7.2pt, weight: "bold", fill: rgb("#004a99"))
-    #it.body
-    #v(-0.1cm)
-    #line(length: 100%, stroke: 0.5pt + gray)
-    #v(0.02cm)
-  ]
-
-  show heading.where(level: 3): it => block(sticky: true, width: 100%)[
-    #set text(size: 6.2pt, weight: "bold", fill: rgb("#1a73e8"))
-    #it.body
-    #v(0.02cm)
-  ]
+  show heading: it => {
+    if it.level == 1 {
+      block(sticky: true, width: 100%)[
+        #set align(center)
+        #set text(size: 8.5pt, weight: "bold", fill: rgb("#002b5c"))
+        #if it.numbering != none {
+          counter(heading).display(it.numbering)
+          h(0.5em)
+        }
+        #smallcaps(it.body)
+        #v(-0.2cm)
+        #line(length: 100%, stroke: 1pt + rgb("#002b5c"))
+        #v(0.05cm)
+      ]
+    } else if it.level == 2 {
+      block(sticky: true, width: 100%)[
+        #set text(size: 7.2pt, weight: "bold", fill: rgb("#004a99"))
+        #if it.numbering != none {
+          counter(heading).display(it.numbering)
+          h(0.3em)
+        }
+        #it.body
+        #v(-0.1cm)
+        #line(length: 100%, stroke: 0.5pt + gray)
+        #v(0.02cm)
+      ]
+    } else if it.level == 3 {
+      block(sticky: true, width: 100%)[
+        #set text(size: 6.2pt, weight: "bold", fill: rgb("#1a73e8"))
+        #if it.numbering != none {
+          counter(heading).display(it.numbering)
+          h(0.3em)
+        }
+        #it.body
+        #v(0.02cm)
+      ]
+    } else {
+      it
+    }
+  }
 
   body
 }
