@@ -1,6 +1,23 @@
 // Template for dense Typst cheat sheets
 #let example_counter = counter("example")
 
+#let infobox(title, body, accent: rgb("#4caf50")) = {
+  context block(
+    breakable: false,
+    width: 100%,
+    fill: rgb("#f8f9fa"),
+    stroke: (left: 1.5pt + accent),
+    inset: (x: 3pt, y: 2pt),
+    outset: (x: 0pt, y: 1pt),
+    radius: 1pt,
+  )[
+    #set text(size: 5.0pt, weight: "bold", fill: accent.darken(30%))
+    #title \
+    #set text(size: 4.5pt, weight: "regular", fill: black)
+    #body
+  ]
+}
+
 #let example(title, question, steps, result, accent: rgb("#004a99")) = {
   example_counter.step()
   context block(

@@ -1,4 +1,4 @@
-#import "template.typ": cheatsheet, example, key
+#import "template.typ": cheatsheet, example, infobox, key
 
 #show: cheatsheet.with(
   title: "FMM - Mathematical Methods for Physics",
@@ -8,8 +8,8 @@
 
 == 1. Fundamental PDEs
 - *Laplace Eq:* $nabla^2 u = 0$ (Steady state / Equilibrium)
-- *Heat Eq:* $(dif u) / (dif t) = k nabla^2 u$ (Diffusion). Decay: $e^(-k lambda t)$.
-- *Wave Eq:* $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ (Oscillation). Sols: $cos(omega t), sin(omega t)$.
+- *Heat Eq:* $(partial u) / (partial t) = k nabla^2 u$ (Diffusion). Decay: $e^(-k lambda t)$.
+- *Wave Eq:* $(partial^2 u) / (partial t^2) = c^2 nabla^2 u$ (Oscillation). Sols: $cos(omega t), sin(omega t)$.
 - *Helmholtz Eq:* $nabla^2 psi + k^2 psi = 0$. From Wave Eq: $u(bold(r), t) = psi(bold(r)) e^(-i omega t)$.
 - *Poisson Eq:* $nabla^2 u = f(bold(r))$ (Inhomogeneous Laplace)
 
@@ -24,8 +24,8 @@
 
 == 3. The "Is it Homogeneous?" Decision Tree
 - *Zero BCs + Zero Source:* $arrow$ Use standard SOV (Section 2).
-- *Non-Zero Constant BCs:* $arrow$ Find equilibrium $u_E(x)$, let $v = u - u_E$.
-- *Non-Zero Time-Dep BCs:* $arrow$ Find ref function $r(x,t)$, let $v = u - r$.
+- *Non-Zero Constant BCs:* $arrow$ Find equilibrium $u_E(x)$, let $v = u - u_E$ (so $v$ has homo BCs).
+- *Non-Zero Time-Dep BCs:* $arrow$ Find ref function $r(x,t)$, let $v = u - r$ (so $v$ has homo BCs).
 - *Non-Zero Source $+Q(x,t)$:* $arrow$ Use Eigenfunction Expansion (Section 15).
 - *Multiple Non-Zero BCs:* $arrow$ Split $u = u_1 + u_2$ (each gets ONE bad BC).
 
@@ -61,6 +61,7 @@
 *Definition:* $L[G(bold(r), bold(r)_0)] = delta(bold(r) - bold(r)_0)$ with homogeneous BCs.
 - *Direct Method (1D):*
   $G(x, x_0) = cases(C u_1(x) u_2(x_0) & x < x_0, C u_1(x_0) u_2(x) & x > x_0)$
+  where $u_1, u_2$ are solutions to the *homogeneous* ODE $L[u]=0$.
   #key(accent: color_green)[$C = (-1) / (p(x_0) W(u_1, u_2)(x_0))$] where $W = u_1 u_2' - u_1' u_2$.
 - *Finding $C$ manually:* Match at $x=x_0$: 1. $G_<=G_>$ (Cont.) and 2. $G_>' - G_< ' = (1)/(p(x_0))$ (Jump).
 - *Eigenfunction Expansion:*
@@ -70,7 +71,7 @@
     accent: color_green,
   )[$u(bold(r)) = integral_V G(bold(r), bold(r)_0) f(bold(r)_0) dif V_0$]
 - *Inhomogeneous BCs ($u(a)=alpha, u(b)=beta$):*
-  #key(accent: color_green)[$u = integral G f + [-p alpha (dif G) / (dif x_0)]_(x_0=a) + [p beta (dif G) / (dif x_0)]_(x_0=b)$].
+  #key(accent: color_green)[$u = integral G f dif x_0 + [-p alpha (partial G) / (partial x_0)]_(x_0=a) + [p beta (partial G) / (partial x_0)]_(x_0=b)$].
 
 == 7. Standard ODE Solutions
 #set text(size: 4.5pt)
@@ -104,8 +105,8 @@
 == 8. Practical Tips & Tricks
 - *Regularity:* If $|u(0)| < infinity$, discard singular solutions ($Y_m, K_m, Q_n^m, ln r, r^(-n)$).
 - *Late Time:* Only the mode with the *smallest* $lambda > 0$ survives.
-- *Equilibrium:* Set $(dif u) / (dif t) = 0$ (Heat) or $(dif^2 u) / (dif t^2) = 0$ (Wave) $arrow$ solve $nabla^2 u = f$.
-- *Fredholm:* $L[u]=f$ has sol iff $integral f phi.alt_h sigma = 0$ for zero-modes $phi.alt_h$.
+- *Equilibrium:* Set $(partial u) / (partial t) = 0$ (Heat) or $(partial^2 u) / (partial t^2) = 0$ (Wave) $arrow$ solve $nabla^2 u = f$.
+- *Fredholm:* $L[u]=f$ has sol iff $integral f phi.alt_h sigma dif x = 0$ for zero-modes $phi.alt_h$.
 
 == 9. Shortcuts & Solving Steps
 - *Coord. Change:* $x^2 phi.alt'' + x phi.alt' + lambda phi.alt = 0 arrow phi.alt'' (z) + lambda phi.alt(z) = 0$ ($x = e^z$).
@@ -140,51 +141,58 @@
 
 == 11. Coordinate Systems ($nabla^2 u$)
 - *Cylindrical ($r, theta, z$):*
-  #key[$nabla^2 u = ((1) / (r)) (dif) / (dif r) (r (dif u) / (dif r)) + ((1) / (r^2)) (dif^2 u) / (dif theta^2) + (dif^2 u) / (dif z^2)$]
+  #key[$nabla^2 u = ((1) / (r)) (partial) / (partial r) (r (partial u) / (partial r)) + ((1) / (r^2)) (partial^2 u) / (partial theta^2) + (partial^2 u) / (partial z^2)$]
 - *Spherical ($rho, theta, phi.alt$):*
-  #key[$nabla^2 u = ((1) / (rho^2)) (dif) / (dif rho) (rho^2 (dif u) / (dif rho)) + ((1) / (rho^2 sin theta)) (dif) / (dif theta) (sin theta (dif u) / (dif theta)) + ((1) / (rho^2 sin^2 theta)) (dif^2 u) / (dif phi.alt^2)$]
-  - *Radial only:* $nabla^2 u = (((dif^2) / (dif rho^2)) (rho u)) / (rho)$
+  #key[$nabla^2 u = ((1) / (rho^2)) (partial) / (partial rho) (rho^2 (partial u) / (partial rho)) + ((1) / (rho^2 sin theta)) (partial) / (partial theta) (sin theta (partial u) / (partial theta)) + ((1) / (rho^2 sin^2 theta)) (partial^2 u) / (partial phi.alt^2)$]
+  - *Radial only:* $nabla^2 u = (((partial^2) / (partial rho^2)) (rho u)) / (rho)$
 
 == 12. Special Function Identities
 - *Bessel:* $(x^n J_n)' = x^n J_(n-1)$ and $(x^(-n) J_n)' = -x^(-n) J_(n+1)$
 - *Legendre:* $P_0=1, P_1=x, P_2 = 1/2 (3x^2-1)$. $integral_(-1)^1 P_n^2 = 2/(2n+1)$.
 
-== 13. Mathematical Toolkit
-- *Trig:* $sin A cos B = 1/2 [sin(A+B) + sin(A-B)]$
-  - $sin^2 x = (1 - cos 2x) / 2$, $cos^2 x = (1 + cos 2x) / 2$
-- *Common Integrals:*
-  - $integral_0^L x sin((n pi x) / (L)) dif x = ((-1)^(n+1) L^2) / (n pi)$
-  - $integral_0^L x cos((n pi x) / (L)) dif x = (L^2) / (n^2 pi^2) ((-1)^n - 1)$
+#infobox(
+  "Mathematical Toolkit",
+  accent: rgb("#009688"),
+  [
+    - *Trig:* $sin A cos B = 1/2 [sin(A+B) + sin(A-B)]$
+      - $sin^2 x = (1 - cos 2x) / 2$, $cos^2 x = (1 + cos 2x) / 2$
+    - *Common Integrals:*
+      - $integral_0^L x sin((n pi x) / (L)) dif x = ((-1)^(n+1) L^2) / (n pi)$
+      - $integral_0^L x cos((n pi x) / (L)) dif x = (L^2) / (n^2 pi^2) ((-1)^n - 1)$
+  ],
+)
 
 == 14. Strategy: Inhomogeneous PDEs
 *Goal:* Solve $L[u] = f(bold(r), t)$ with BC $u(S) = g(S)$.
 1. *Homogenize BCs:* Find $w(bold(r))$ matching BCs. Let $v = u - w$.
 2. *New PDE:* $L[v] = f - L[w]$ with *homogeneous* BCs.
 3. *Expand:* $v = sum a_n(t) phi.alt_n (bold(r))$ using spatial eigenfunctions.
-4. *ODE:* Sub sum into PDE $arrow$ get $(dif a_n) / (dif t) + k lambda_n a_n = f_n(t)$. Solve via Int. Factor $e^(k lambda_n t)$.
+4. *ODE:* Sub sum into PDE $arrow$ get $(dif a_n) / (dif t) + k lambda_n a_n = f_n(t)$.
+  - *Solve:* Multiply by Int. Factor $e^(k lambda_n t)$ and integrate: $a_n(t) = e^(-k lambda_n t) integral e^(k lambda_n t) f_n(t) dif t$.
 - *Explicit Steady Sol ($L[u] + alpha u = f$):*
   #key(accent: rgb("#1a73e8"))[$u(x) = sum_n (f_n phi.alt_n (x)) / (alpha - lambda_n)$] (Works for $bold(r)$ in multi-D too) \
   where $f_n = (chevron.l f | phi.alt_n chevron.r) / (chevron.l phi.alt_n | phi.alt_n chevron.r)$.
 
-== 15. Common Mistakes
-- *Weight:* $integral f phi.alt_n sigma dif x$ | *Norm:* Divide by $integral phi.alt_n^2 sigma$ | *Green's:* $G$ has *homo* BCs.
-- *Jacobians:* Remember $r$ or $rho^2 sin theta$ | *Neumann:* Check $n=0$ | *Phase:* $u(L)=0 arrow sin(sqrt(lambda)(L-x))$.
-- *Draining:* If even ONE boundary is $u=0$ (Dirichlet), all heat *must* leak out. The steady state is always $0$ as $t arrow infinity$ (meaning no $lambda=0$ mode exists).
+#infobox(
+  "Common Mistakes & Traps",
+  accent: rgb("#d32f2f"),
+  [
+    - *Weight:* Always multiply by $sigma$ in $integral f phi.alt_n sigma dif x$ and divide by $integral phi.alt_n^2 sigma dif x$.
+    - *Green's BCs:* $G$ always has *homogeneous* BCs, even if the problem doesn't.
+    - *Jacobians:* Don't forget $r$ (cyl) or $rho^2 sin theta$ (sph) in volume integrals.
+    - *Neumann Zero-Mode:* Check if $n=0$ ($lambda=0$) exists when $u'=0$.
+    - *Phase Shifts:* If $u(L)=0$, use $sin(sqrt(lambda)(L-x))$ instead of $sin(sqrt(lambda) x)$.
+    - *Draining:* If even ONE boundary is $u=0$ (Dirichlet), all heat *must* leak out. The steady state is always $0$ as $t arrow infinity$ (meaning no $lambda=0$ mode exists).
+  ],
+)
 
 == Examples
-#block(
-  fill: rgb("#fffde7"),
-  stroke: 0.5pt + rgb("#fbc02d"),
-  inset: 3pt,
-  radius: 2pt,
-  width: 100%,
-)[
-  *Match Keywords:*
+#infobox("Match Keywords to Examples", accent: rgb("#fbc02d"), [
   - *"Find equilibrium/steady"* $arrow$ See Ex: Heat Eq Equilibrium
   - *"Find vibration freq"* $arrow$ See Ex: Quarter Disk / Annular Membrane
   - *"Check stability"* $arrow$ See Ex: Stability & Robin BC
   - *"Compare methods"* $arrow$ See Ex: BVP via Eigenfunctions & Green's
-]
+])
 
 === Fourier & SL Theory
 #example(
@@ -287,7 +295,7 @@
 #example(
   "2D Heat Rectangle",
   [
-    Solve $(dif u) / (dif t) = k nabla^2 u$ on $[0,L] times [0,H]$ with $((dif u) / (dif x))(0)=((dif u) / (dif x))(L)=0$ and $u(x,0,t)=u(x,H,t)=0$.
+    Solve $(partial u) / (partial t) = k nabla^2 u$ on $[0,L] times [0,H]$ with $((partial u) / (partial x))(0)=((partial u) / (partial x))(L)=0$ and $u(x,0,t)=u(x,H,t)=0$.
   ],
   [
     1. SOV $u(x,y,t) = X(x)Y(y)T(t) arrow.double ((dif T) / (dif t)) / (k T) = ((dif^2 X) / (dif x^2)) / (X) + ((dif^2 Y) / (dif y^2)) / (Y) = -lambda$.
@@ -305,12 +313,12 @@
 #example(
   "Inhomog. Heat & Avg Temp",
   [
-    Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2) + Q(x,t)$ with $u(0,t)=T_1, u(L,t)=T_2$.
+    Solve $(partial u) / (partial t) = kappa (partial^2 u) / (partial x^2) + Q(x,t)$ with $u(0,t)=T_1, u(L,t)=T_2$.
   ],
   [
     1. Shift: $w(x) = T_1 + (x) / (L) (T_2 - T_1)$. Let $v = u - w$.
-    2. New PDE: $(dif v) / (dif t) = kappa (dif^2 v) / (dif x^2) + Q(x,t)$ with $v(0)=v(L)=0$.
-    3. Expand $v = sum a_n (t) sin((n pi x) / (L))$. Sub into PDE arrow.double $sum [a'_n + kappa lambda_n a_n] sin phi.alt_n = Q$.
+    2. New PDE: $(partial v) / (partial t) = kappa (partial^2 v) / (partial x^2) + Q(x,t)$ with $v(0)=v(L)=0$.
+    3. Expand $v = sum a_n (t) sin((n pi x) / (L))$. Sub into PDE arrow.double $sum [(dif a_n) / (dif t) + kappa lambda_n a_n] sin phi.alt_n = Q$.
     4. ODE: $(dif a_n) / (dif t) + kappa lambda_n a_n = q_n(t)$, solve via Integrating Factor $e^(kappa lambda_n t)$.
     5. Avg Temp: $T_("avg") (t) = (1) / (L) integral_0^L u(x,t) dif x$.
   ],
@@ -322,7 +330,7 @@
 #example(
   "Heat Eq in Disk (Radial)",
   [
-    Solve $(dif u) / (dif t) = kappa nabla^2 u$ on $r <= a$ with $u(a,t)=0, u(r,0)=f(r)$.
+    Solve $(partial u) / (partial t) = kappa nabla^2 u$ on $r <= a$ with $u(a,t)=0, u(r,0)=f(r)$.
   ],
   [
     1. Radial: $r^2 (dif^2 R) / (dif r^2) + r (dif R) / (dif r) + lambda r^2 R = 0 arrow.double R(r) = A J_0(sqrt(lambda) r) + B Y_0(sqrt(lambda) r)$.
@@ -339,7 +347,7 @@
 #example(
   "Mixed Heat Rod",
   [
-    Solve Heat Eq with $u(0,t)=0$ (fixed) and $((dif u) / (dif x))(L,t)=0$ (insulated).
+    Solve Heat Eq with $u(0,t)=0$ (fixed) and $((partial u) / (partial x))(L,t)=0$ (insulated).
   ],
   [
     1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
@@ -355,11 +363,11 @@
 #example(
   "1D Heat Equation Basics",
   [
-    Solve $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ on $0 < x < L$ with $u(0,t)=u(L,t)=0$ and $u(x,0) = A sin((3 pi x) / (L))$. What does $(dif^2 u) / (dif x^2)$ measure physically, and what are the steady-state solutions?
+    Solve $(partial u) / (partial t) = kappa (partial^2 u) / (partial x^2)$ on $0 < x < L$ with $u(0,t)=u(L,t)=0$ and $u(x,0) = A sin((3 pi x) / (L))$. What does $(partial^2 u) / (partial x^2)$ measure physically, and what are the steady-state solutions?
   ],
   [
-    1. Interpretation: $(dif^2 u) / (dif x^2)$ measures the spatial curvature. Heat changes fastest where curvature is highest.
-    2. Steady-state: Set $(dif u) / (dif t) = 0 arrow.double (dif^2 u) / (dif x^2) = 0 arrow.double u(x) = c_1 x + c_2$. With zero BCs, $u(x)=0$.
+    1. Interpretation: $(partial^2 u) / (partial x^2)$ measures the spatial curvature. Heat changes fastest where curvature is highest.
+    2. Steady-state: Set $(partial u) / (partial t) = 0 arrow.double (partial^2 u) / (partial x^2) = 0 arrow.double u(x) = c_1 x + c_2$. With zero BCs, $u(x)=0$.
     3. SOV: $u(x,t) = X(x)T(t) arrow.double X_n(x) = sin((n pi x) / (L))$ and $T_n(t) = e^(-kappa ((n pi) / (L))^2 t)$.
     4. Apply IC: $u(x,0) = A sin((3 pi x) / (L))$ matches exactly the $n=3$ mode bc the basis is orthogonal.
   ],
@@ -371,11 +379,11 @@
 #example(
   "Non-Equilibrium (Rod with Source)",
   [
-    Find equilibrium for $partial_t u = kappa partial_x^2 u + q$ on $0 < x < L$ with homogeneous Neumann BCs.
+    Find equilibrium for $(partial u) / (partial t) = kappa (partial^2 u) / (partial x^2) + q$ on $0 < x < L$ with homogeneous Neumann BCs.
   ],
   [
     1. Sanity check: The rod is insulated but has a constant heat source. The average temperature must grow indefinitely, meaning no true equilibrium can exist unless $q=0$.
-    2. Math proof: Force $partial_t u = 0 arrow.double kappa partial_x^2 u + q = 0$.
+    2. Math proof: Force $(partial u) / (partial t) = 0 arrow.double kappa (partial^2 u) / (partial x^2) + q = 0$.
     3. Integrate: $u_("eq")(x) = -(q) / (2 kappa) x^2 + alpha x + beta$.
     4. Apply BCs: $u_("eq")'(0) = alpha = 0$ and $u_("eq")'(L) = -(q L) / (kappa) + alpha = 0$.
     5. Contradiction: This strictly requires $q=0$, matching the obvious physical reality.
@@ -388,11 +396,11 @@
 #example(
   "Heat Eq Equilibrium & Consistency",
   [
-    Find equilibrium for $(dif u) / (dif t) = k (dif^2 u) / (dif x^2) + Q(x)$ given BCs $(dif u) / (dif x) (0)=alpha, (dif u) / (dif x) (L)=beta$.
+    Find equilibrium for $(partial u) / (partial t) = k (partial^2 u) / (partial x^2) + Q(x)$ given BCs $((partial u) / (partial x)) (0)=alpha, ((partial u) / (partial x)) (L)=beta$.
   ],
   [
     1. Check: Equilibrium exists iff net flux $-(beta - alpha)$ balances source $integral_0^L Q(x) dif x$.
-    2. Math: Set $(dif u) / (dif t) = 0 arrow.double (dif^2 u_("eq")) / (dif x^2) = - (Q(x)) / (k)$.
+    2. Math: Set $(partial u) / (partial t) = 0 arrow.double (partial^2 u_("eq")) / (partial x^2) = - (Q(x)) / (k)$.
     3. Integrate: For $Q=k, u(0)=A, u(L)=B$, $u_("eq") = -(x^2) / (2) + a x + b$.
   ],
   [
@@ -403,12 +411,12 @@
 #example(
   "Time-Dependent BCs",
   [
-    Reduce $(dif u) / (dif t) = k (dif^2 u) / (dif x^2) + Q(x,t)$ with $(dif u) / (dif x) (t,0)=A(t), (dif u) / (dif x) (t,L)=B(t)$ to homogeneous BCs.
+    Reduce $(partial u) / (partial t) = k (partial^2 u) / (partial x^2) + Q(x,t)$ with $((partial u) / (partial x)) (t,0)=A(t), ((partial u) / (partial x)) (t,L)=B(t)$ to homogeneous BCs.
   ],
   [
     1. Ref: $r(x,t) = A(t) x + (B(t)-A(t)) (x^2) / (2L)$ satisfies the non-homogeneous BCs.
-    2. Shift: Let $v = u - r$. Then $(dif v) / (dif x) (t,0) = (dif v) / (dif x) (t,L) = 0$.
-    3. New PDE: $(dif v) / (dif t) = k (dif^2 v) / (dif x^2) + hat(Q)(x,t)$ where $hat(Q) = Q - (dif r) / (dif t) + k (dif^2 r) / (dif x^2)$.
+    2. Shift: Let $v = u - r$. Then $((partial v) / (partial x)) (t,0) = ((partial v) / (partial x)) (t,L) = 0$.
+    3. New PDE: $(partial v) / (partial t) = k (partial^2 v) / (partial x^2) + hat(Q)(x,t)$ where $hat(Q) = Q - (partial r) / (partial t) + k (partial^2 r) / (partial x^2)$.
   ],
   [
     $v$ solves the PDE with homogeneous Neumann BCs and a modified source.
@@ -419,7 +427,7 @@
 #example(
   "Damped Wave (Friction)",
   [
-    Solve $rho (dif^2 u) / (dif t^2) = T_0 (dif^2 u) / (dif x^2) + beta (dif u) / (dif t)$ with $u(0,t)=u(L,t)=0$.
+    Solve $rho (partial^2 u) / (partial t^2) = T_0 (partial^2 u) / (partial x^2) + beta (partial u) / (partial t)$ with $u(0,t)=u(L,t)=0$.
   ],
   [
     1. SOV $u = X(x)T(t) arrow.double ((dif^2 X) / (dif x^2)) / (X) = (rho (dif^2 T) / (dif t^2) - beta (dif T) / (dif t)) / (T_0 T) = -lambda$.
@@ -436,12 +444,12 @@
 #example(
   "Wave Eq Resonance",
   [
-    Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=0, u(L,t)=sin(omega t)$.
+    Solve $(partial^2 u) / (partial t^2) = c^2 (partial^2 u) / (partial x^2)$ with $u(0,t)=0, u(L,t)=sin(omega t)$.
   ],
   [
     1. Reference: $w(x,t) = (x) / (L) sin(omega t)$. Let $v = u - w$.
-    2. New PDE: $(dif^2 v) / (dif t^2) - c^2 (dif^2 v) / (dif x^2) = -(dif^2 w) / (dif t^2) = (x / L) omega^2 sin(omega t)$.
-    3. Expand $v = sum a_n(t) sin((n pi x) / (L)) arrow.double a_n'' + omega_n^2 a_n = q_n sin(omega t)$.
+    2. New PDE: $(partial^2 v) / (partial t^2) - c^2 (partial^2 v) / (partial x^2) = -(partial^2 w) / (partial t^2) = (x / L) omega^2 sin(omega t)$.
+    3. Expand $v = sum a_n(t) sin((n pi x) / (L)) arrow.double (dif^2 a_n) / (dif t^2) + omega_n^2 a_n = q_n sin(omega t)$.
     4. Particular: $a_n (t) = (q_n) / (omega_n^2 - omega^2) sin(omega t)$.
     5. Resonance: If $omega arrow omega_n = (n pi c) / (L)$, then $a_n (t) prop t cos(omega_n t)$.
   ],
@@ -453,7 +461,7 @@
 #example(
   "Mixed BCs (1D Wave)",
   [
-    Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0) - ((dif u) / (dif x))(0) = 0, ((dif u) / (dif x))(L) = 0$.
+    Solve $(partial^2 u) / (partial t^2) = c^2 (partial^2 u) / (partial x^2)$ with $u(0) - ((partial u) / (partial x))(0) = 0, ((partial u) / (partial x))(L) = 0$.
   ],
   [
     1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
@@ -469,7 +477,7 @@
 #example(
   "Quarter Disk Membrane",
   [
-    Find frequencies for $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $0 < theta < (pi) / (2), 0 < r < b$ with $u=0$ on all boundaries.
+    Find frequencies for $(partial^2 u) / (partial t^2) = c^2 nabla^2 u$ on $0 < theta < (pi) / (2), 0 < r < b$ with $u=0$ on all boundaries.
   ],
   [
     1. SOV $u = R(r)Theta(theta)T(t) arrow.double ((dif^2 Theta) / (dif theta^2)) / (Theta) = -mu$.
@@ -488,12 +496,12 @@
 #example(
   "1D Wave with Step Velocity",
   [
-    Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2)$ with $u(0,t)=u(L,t)=0$, $u(x,0)=0$, and $u_t(x,0) = V$ for $x in (0, L/2)$, else $0$.
+    Solve $(partial^2 u) / (partial t^2) = c^2 (partial^2 u) / (partial x^2)$ with $u(0,t)=u(L,t)=0$, $u(x,0)=0$, and $(partial u) / (partial t)(x,0) = V$ for $x in (0, L/2)$, else $0$.
   ],
   [
     1. SOV: $u = phi.alt(x)h(t)$. Spatial yields $phi.alt_n(x) = sin((n pi x) / (L))$ with $lambda_n = ((n pi) / (L))^2$.
     2. Temporal: $h_n(t) = A_n cos((n pi c t) / (L)) + B_n sin((n pi c t) / (L))$. $u(x,0)=0 arrow.double A_n = 0$.
-    3. Apply IC: $(dif u) / (dif t) (x,0) = sum B_n ((n pi c) / (L)) sin((n pi x) / (L)) = g(x)$.
+    3. Apply IC: $(partial u) / (partial t) (x,0) = sum B_n ((n pi c) / (L)) sin((n pi x) / (L)) = g(x)$.
     4. Coeffs: $B_n ((n pi c) / (L)) = (2) / (L) integral_0^(L/2) V sin((n pi x) / (L)) dif x = (2V) / (n pi) (1 - cos((n pi) / (2))$.
     5. Zero modes: $B_n = 0$ when $cos((n pi)/(2)) = 1 arrow.double n = 4k$.
   ],
@@ -505,12 +513,12 @@
 #example(
   "3D Wave on Circular Slab",
   [
-    Solve $(dif^2 u) / (dif t^2) = c^2 nabla^2 u$ on $r < a, 0 < z < H$ with zero BCs. IC: $u = r(a-r) cos theta sin((pi z) / (H))$, $u_t = 0$.
+    Solve $(partial^2 u) / (partial t^2) = c^2 nabla^2 u$ on $r < a, 0 < z < H$ with zero BCs. IC: $u = r(a-r) cos theta sin((pi z) / (H))$, $(partial u) / (partial t) = 0$.
   ],
   [
     1. SOV $u = R(r)Theta(theta)Z(z)T(t)$. IC dependencies force $Z(z) = sin((pi z) / (H))$ and $Theta(theta) = cos theta$ ($m=1$).
     2. Radial: $R_k(r) = J_1(sqrt(mu_k) r)$ where $sqrt(mu_k) = (z_(1,k)) / (a)$ to satisfy $u(a)=0$.
-    3. Temporal: $(dif^2 T) / (dif t^2) = -c^2 (mu_k + ((pi) / (H))^2) T$. $u_t=0 arrow.double T_k(t) = cos(omega_k t)$ with $omega_k = c sqrt(((z_(1,k))/(a))^2 + ((pi)/(H))^2)$.
+    3. Temporal: $(dif^2 T) / (dif t^2) = -c^2 (mu_k + ((pi) / (H))^2) T$. $(partial u) / (partial t)=0 arrow.double T_k(t) = cos(omega_k t)$ with $omega_k = c sqrt(((z_(1,k))/(a))^2 + ((pi)/(H))^2)$.
     4. Expand: $u(r,theta,z,t) = cos theta sin((pi z) / (H)) sum A_k J_1((z_(1,k) r) / (a)) cos(omega_k t)$.
     5. IC match: $sum A_k J_1 = r(a-r) arrow.double A_k = (2) / (a^2 J_2^2(z_(1,k))) integral_0^a r(a-r) J_1((z_(1,k) r) / (a)) r dif r$.
   ],
@@ -539,7 +547,7 @@
 #example(
   "Driven Wave & Resonance",
   [
-    Solve $(dif^2 u) / (dif t^2) = c^2 (dif^2 u) / (dif x^2) + g(x) cos(omega t)$ with fixed endpoints.
+    Solve $(partial^2 u) / (partial t^2) = c^2 (partial^2 u) / (partial x^2) + g(x) cos(omega t)$ with fixed endpoints.
   ],
   [
     1. Expand: $u = sum A_i (t) phi.alt_i (x)$. PDE becomes $(dif^2 A_i) / (dif t^2) + c^2 lambda_i A_i = gamma_i cos(omega t)$.
@@ -585,6 +593,24 @@
   ],
   [
     $u(rho) = (V_0 b) / (b-a) (1 - (a) / (rho))$.
+  ],
+)
+
+#example(
+  "Thick Shell with Angular BCs",
+  [
+    Solve $nabla^2 u = 0$ for $a < rho < b$ with $u(a, theta, phi.alt) = alpha(theta, phi.alt)$ and $u(b, theta, phi.alt) = beta(theta, phi.alt)$.
+  ],
+  [
+    1. Basis: Domain excludes $0$, so keep both $rho^n$ and $rho^(-n-1)$.
+    2. Expand: $u = sum_n sum_m (A_("n,m") rho^n + C_("n,m") rho^(-n-1)) P_n^m (cos theta) cos(m phi.alt) + (dots) sin(m phi.alt)$.
+    3. Match Inner: $u(a) = alpha$. Isolate via orthogonality: $A_("n,m") a^n + C_("n,m") a^(-n-1) = alpha_("n,m")$.
+    4. Match Outer: $u(b) = beta$. Isolate similarly: $A_("n,m") b^n + C_("n,m") b^(-n-1) = beta_("n,m")$.
+    5. Solve System: Solve the $2 times 2$ system for $A_("n,m"), C_("n,m")$ for each $(n,m)$ mode.
+    6. *TRICK SHORTCUT:* *If $alpha$ and $beta$ are given as plain constants (e.g. $alpha=0, beta=1$), only the $n=0, m=0$ mode ($P_0^0=1$) survives! The massive sum instantly reduces to the simple radial-only case.*
+  ],
+  [
+    Yields $2 times 2$ coupled systems for mode coeffs: $A a^n + C a^(-n-1) = alpha_n$ and $A b^n + C b^(-n-1) = beta_n$.
   ],
 )
 
@@ -642,33 +668,15 @@
   "Stability & Robin BC",
   accent: color_stability,
   [
-    Check stability of $(dif u) / (dif t) = kappa (dif^2 u) / (dif x^2)$ with $u(0,t)=0, ((dif u) / (dif x))(L,t) = -h u(L,t)$.
+    Analyze stability of $(partial u) / (partial t) = k (partial^2 u) / (partial x^2)$ with $u(0)=0, u'(L) = -h u(L)$. Check the boundary case $h L = -1$.
   ],
   [
-    1. Spatial: $(dif^2 X) / (dif x^2) + lambda X = 0 arrow.double X(x) = A cos(sqrt(lambda) x) + B sin(sqrt(lambda) x)$.
-    2. BC $X(0)=A=0$. Robin BC: $sqrt(lambda) cos(sqrt(lambda) L) = -h sin(sqrt(lambda) L) arrow.double tan(sqrt(lambda) L) = (-sqrt(lambda)) / (h)$.
-    3. Stability: We need $lambda > 0$ for decay. If $lambda = -gamma^2 < 0$, then $tanh(gamma L) = (-gamma) / (h)$.
-    4. If $h < 0$, let $h = -|h|$. Then $tanh(gamma L) = (gamma) / (|h|)$.
-    5. Instability exists if slope of $tanh(gamma L)$ at $0$ is $> (1) / (|h|) arrow.double L > (1) / (|h|)$.
-  ],
-  [
-    Unstable if $h < (-1) / (L)$.
-  ],
-)
-
-#example(
-  "Robin BC Stability Boundary",
-  accent: color_stability,
-  [
-    Solve $partial_t u = k partial_x^2 u$ with $u(0)=0$ and $u'(L) = -h u(L)$. Check roots for the specific case $h L = -1$.
-  ],
-  [
-    1. Spatial: $phi.alt'' + lambda phi.alt = 0$ with $phi.alt(0)=0 arrow.double phi.alt(x) = c_2 sin(sqrt(lambda) x)$.
+    1. Spatial: $phi.alt'' + lambda phi.alt = 0 arrow.double phi.alt(x) = c_2 sin(sqrt(lambda) x)$.
     2. Robin BC: $sqrt(lambda) cos(sqrt(lambda) L) = -h sin(sqrt(lambda) L) arrow.double tan(sqrt(lambda) L) = -(sqrt(lambda))/(h)$.
-    3. Check zero-mode ($lambda = 0$): $phi.alt(x) = a x$. The boundary condition forces $a(1 + h L) = 0$. This means $lambda=0$ is a valid eigenvalue iff $h L = -1$.
-    4. Late time behavior ($h L = -1$): All modes with $lambda > 0$ decay exponentially. Only the linear $lambda=0$ mode survives the infinite time limit.
+    3. Stability ($lambda < 0$): Let $lambda = -gamma^2$. Then $tanh(gamma L) = (gamma) / (|h|)$ (for $h<0$). Instability if slope at $0$ is $> (1)/(|h|) arrow.double L > (1)/(|h|)$.
+    4. Zero-mode ($lambda = 0$): $phi.alt(x) = a x$. BC forces $a(1 + h L) = 0$. Valid eigenvalue iff $h L = -1$.
   ],
   [
-    If $h L = -1$, the steady-state approaches $u(x,t) arrow A_0 x$. If $h L > -1$, it decays entirely to $0$.
+    Unstable if $h < -1/L$. If $h L = -1$, late time approaches steady-state $u(x,t) arrow A_0 x$. Else, decays to $0$.
   ],
 )
