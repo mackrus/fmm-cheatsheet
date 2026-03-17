@@ -23,10 +23,10 @@ jobs:
         uses: typst-community/setup-typst@v3
         
       - name: Compile PDF
-        run: typst compile fmm_cheatsheet.typ fmm_cheatsheet.pdf
+        run: typst compile main.typ main.pdf
         
       - name: Compile Preview Images
-        run: typst compile fmm_cheatsheet.typ page-{n}.png --ppi 200
+        run: typst compile main.typ page-{n}.png --ppi 200
 
       - name: Create index.html
         run: |
@@ -53,7 +53,7 @@ jobs:
           <body>
               <header>
                   <div class="title">FMM - Mathematical Methods for Physics</div>
-                  <a href="fmm_cheatsheet.pdf" download="fmm_cheatsheet.pdf" target="_blank" rel="noopener" class="download-btn">⬇ Download PDF</a>
+                  <a href="main.pdf" download="main.pdf" target="_blank" rel="noopener" class="download-btn">⬇ Download PDF</a>
               </header>
               <main>
                   <div class="page-container">

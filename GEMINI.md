@@ -4,8 +4,9 @@ This directory contains a comprehensive, high-density cheat sheet for the course
 
 ## Project Structure
 
-- `fmm_cheatsheet.typ`: The main source file containing all mathematical formulas, theory, and worked examples.
+- `main.typ`: The main source file containing all mathematical formulas, theory, and worked examples.
 - `template.typ`: A reusable Typst template that defines the dense 4-column layout, font sizes, and header styles used in the cheat sheet.
+- `references/`: Directory containing source materials, exam papers, and review documents.
 - `.github/workflows/deploy.yml`: A GitHub Actions workflow that automatically compiles the Typst source into a PDF and deploys it to GitHub Pages as a static site.
 
 ## Key Content Areas
@@ -35,13 +36,13 @@ To compile the cheat sheet locally, ensure you have the Typst CLI or Tinymist in
 
 ```bash
 # Compile to PDF (Typst)
-typst compile fmm_cheatsheet.typ
+typst compile main.typ
 
 # Compile to PDF (Tinymist)
-tinymist compile fmm_cheatsheet.typ
+tinymist compile main.typ
 
 # Watch for changes
-typst watch fmm_cheatsheet.typ
+typst watch main.typ
 ```
 
 ## Development Environment

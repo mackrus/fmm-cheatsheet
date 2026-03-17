@@ -1,3 +1,4 @@
+// !main: main.typ
 // Template for dense Typst cheat sheets
 #let example_counter = counter("example")
 

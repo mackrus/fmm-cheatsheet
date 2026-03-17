@@ -4,7 +4,9 @@ A high-density, professional-grade cheat sheet for the course **FMM - Mathematic
 
 ## 🚀 Key Features
 
-- **3-Column Optimized Layout**: Balanced for high-density mathematical formulas while maintaining readability.
+- **4-Column Optimized Layout**: High-density 4-column landscape design (template-based).
+- **Automated Deployment**: Automatically compiles to PDF/PNG and deploys to GitHub Pages on every push via GitHub Actions.
+- **Neovim Auto-Push**: Includes a project-local `.nvim.lua` for automatic `git push` on save (requires `set exrc`).
 - **Color-Coded Navigation**:
   - **Navy Blue (Level 1)**: Major thematic sections.
   - **Deep Blue (Level 2)**: Theoretical sub-topics.
@@ -12,7 +14,14 @@ A high-density, professional-grade cheat sheet for the course **FMM - Mathematic
 - **Visual Anchors**:
   - `#key[...]`: Critical formulas (Laplacian, Rayleigh quotients, etc.) are highlighted in yellow boxes.
   - `#example(...)`: 29 step-by-step worked examples, each boxed with a blue accent and a highlighted final result.
-- **Automated Deployment**: Automatically compiles to PDF and deploys to GitHub Pages on every push.
+
+## 📁 Project Structure
+
+- `main.typ`: Entry point for the cheat sheet.
+- `template.typ`: Standardized 4-column high-density template.
+- `references/`: Directory for exam papers, review notes, and source materials.
+- `.github/workflows/deploy.yml`: GitHub Actions CI/CD for Pages deployment.
+- `.nvim.lua`: Project-local Neovim configuration for automated workflows.
 
 ## 📚 Core Topics Covered
 
@@ -31,12 +40,12 @@ Ensure you have the [Typst CLI](https://github.com/typst/typst) installed.
 
 ### Compile to PDF
 ```bash
-typst compile fmm_cheatsheet.typ
+typst compile main.typ
 ```
 
 ### Watch for Changes
 ```bash
-typst watch fmm_cheatsheet.typ
+typst watch main.typ
 ```
 
 ## 📐 Mathematical Conventions
