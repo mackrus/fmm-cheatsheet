@@ -9,6 +9,10 @@ This directory contains a comprehensive, high-density cheat sheet for the course
 - `references/`: Directory containing source materials, exam papers, and review documents.
 - `.github/workflows/deploy.yml`: A GitHub Actions workflow that automatically compiles the Typst source into a PDF and deploys it to GitHub Pages as a static site.
 
+## Git Conventions
+
+- **Pushes**: Always use the `--no-verify` flag when pushing to avoid local hook interruptions (e.g., `git push origin main --no-verify`).
+
 ## Key Content Areas
 
 The cheat sheet covers the following core topics:
